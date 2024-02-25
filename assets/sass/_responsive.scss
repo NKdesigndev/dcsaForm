@@ -1,0 +1,55 @@
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) { 
+    .wrapper-1, .wrapper-2, .wrapper-3{
+        padding: 40px 50px !important;
+    }
+    .wrapper-2 .tab-con{
+        padding: 15px 20px;
+        li{
+            margin: 6px;
+        }
+        .nav-item button{
+            padding: 10px 18px !important;
+        }
+    }
+}
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) { 
+    .wrapper-1, .wrapper-2, .wrapper-3{
+        // margin-left: 15px !important;
+        // margin-right: 15px !important;
+        padding: 40px 20px !important;
+        width: 90% !important;
+        margin-left: 5%;
+        // margin-bottom: 15px;
+    }
+    .msg-con, .msg-con-2{
+        padding: 15px;
+    }
+    .msg-con-2 .des-list li{
+        font-size: 15px;
+    }
+    .txt-des{
+        line-height: 25px;
+        font-size: 15px;
+    }
+    .tab-con .mob-scroll{
+        overflow-x: scroll;
+        width: 600px;
+        display: flex;
+
+        li{
+            min-width: 100px;
+            max-width: 120px;
+        }
+    }
+    .wrapper-2 {
+        .tab-con .tab-content .tab-pane{
+            padding: 0px !important;
+            font-size: 13px;
+            overflow-x: auto;
+        }
+
+    }
+}

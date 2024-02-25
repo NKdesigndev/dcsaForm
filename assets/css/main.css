@@ -1,0 +1,226 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: "Adobe Caslon Pro Bold";
+  src: url("../fonts/Adobe Caslon Pro Bold.woff");
+}
+@font-face {
+  font-family: "Verdana";
+  src: url("../fonts/Verdana.woff");
+}
+@font-face {
+  font-family: "Verdana bold";
+  src: url("../fonts/Verdana-Bold.woff");
+}
+body, html {
+  height: 100%;
+}
+
+body {
+  background: #F1F4FC !important;
+}
+
+.wrapper-1, .wrapper-2, .wrapper-3 {
+  margin-bottom: 20px;
+  padding: 40px 50px !important;
+  border-radius: 6px;
+  background: #fff;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper-1 {
+  margin-top: 40px;
+}
+
+.container a {
+  outline: none;
+  color: #1E81C6;
+}
+
+.hdr-1 {
+  font-family: "Adobe Caslon Pro Bold";
+  font-size: clamp(1.1rem, 4vw, 2.5rem);
+  text-align: center;
+  color: #0C0707;
+}
+
+.hdr-2 {
+  text-align: center;
+  font-family: "Verdana";
+  color: #4D4D4D;
+  font-size: clamp(15px, 2vw, 18px);
+}
+
+.msg-con, .msg-con-2 {
+  padding: 30px 35px;
+}
+
+.msg-con {
+  border: 1px solid #DFE3ED;
+  background-color: #F6F9FC;
+  margin-top: 40px;
+  -webkit-box-shadow: 0px 4px 4px -1px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 4px 4px -1px rgba(0, 0, 0, 0.2);
+}
+.msg-con p {
+  font-family: "Verdana";
+  margin: 0;
+  color: #0C0707;
+  line-height: 28px;
+}
+
+.highlight-red {
+  color: #C10000 !important;
+}
+
+.txt-des {
+  font-family: "Verdana";
+  line-height: 28px;
+  font-size: clamp(13px, 2vw, 16px);
+  color: #0C0707;
+}
+
+.msg-con-2 {
+  margin: 20px 0;
+  border: 1px solid #DFE3ED;
+}
+.msg-con-2 .sub-hdr, .msg-con-2 .sub-hdr-2 {
+  color: #1E81C6;
+  font-family: "Verdana bold";
+  font-size: clamp(16px, 2vw, 18px);
+}
+.msg-con-2 .sub-hdr-2 {
+  color: #C10000;
+}
+.msg-con-2 .des-list {
+  padding-left: 0;
+}
+.msg-con-2 .des-list li {
+  list-style: none;
+  margin: 10px 0;
+  font-family: "Verdana";
+  font-size: clamp(13px, 3vw, 16px);
+  color: #0C0707;
+}
+.msg-con-2 .des-list li::before {
+  content: "•";
+  padding-right: 8px;
+  color: #C10000;
+}
+
+.wrapper-2 {
+  padding: 40px 100px !important;
+}
+.wrapper-2 .tab-con {
+  margin-top: 25px;
+  background-color: #F1F4FC;
+  padding: 15px 30px;
+  border-radius: 4px, 57px, 4px, 57px;
+  border-top-left-radius: 57px;
+  border-bottom-right-radius: 57px;
+}
+.wrapper-2 .tab-con .mob-scroll {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.wrapper-2 .tab-con .tab-content .tab-pane {
+  padding: 10px 30px 0px 30px;
+}
+.wrapper-2 .tab-con li {
+  margin: 0 10px;
+}
+.wrapper-2 .tab-con .nav-item button {
+  border-radius: 50px;
+  padding: 12px 25px;
+  background-color: #fff;
+  font-family: "Verdana";
+  font-size: clamp(14px, 2vw, 16px);
+  color: #0C0707;
+  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+.wrapper-2 .tab-con .nav-item .active {
+  color: #fff;
+  background-color: #1E81C6;
+}
+
+.wrapper-3 {
+  padding: 40px 100px !important;
+}
+
+.next-btn {
+  outline: none;
+  text-align: center;
+  margin-bottom: 40px;
+}
+.next-btn button {
+  font-family: "Verdana";
+  background: #1E81C6;
+  padding: 10px 30px;
+  border-radius: 4px;
+  border: none;
+  color: #fff;
+  font-family: clamp(13px, 2vw, 16px);
+  -webkit-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+}
+.next-btn button:hover {
+  -webkit-box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+  background: #C10000;
+}
+
+@media (max-width: 991.98px) {
+  .wrapper-1, .wrapper-2, .wrapper-3 {
+    padding: 40px 50px !important;
+  }
+  .wrapper-2 .tab-con {
+    padding: 15px 20px;
+  }
+  .wrapper-2 .tab-con li {
+    margin: 6px;
+  }
+  .wrapper-2 .tab-con .nav-item button {
+    padding: 10px 18px !important;
+  }
+}
+@media (max-width: 767.98px) {
+  .wrapper-1, .wrapper-2, .wrapper-3 {
+    padding: 40px 20px !important;
+    width: 90% !important;
+    margin-left: 5%;
+  }
+  .msg-con, .msg-con-2 {
+    padding: 15px;
+  }
+  .msg-con-2 .des-list li {
+    font-size: 15px;
+  }
+  .txt-des {
+    line-height: 25px;
+    font-size: 15px;
+  }
+  .tab-con .mob-scroll {
+    overflow-x: scroll;
+    width: 600px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .tab-con .mob-scroll li {
+    min-width: 100px;
+    max-width: 120px;
+  }
+  .wrapper-2 .tab-con .tab-content .tab-pane {
+    padding: 0px !important;
+    font-size: 13px;
+    overflow-x: auto;
+  }
+}/*# sourceMappingURL=main.css.map */
