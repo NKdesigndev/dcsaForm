@@ -1,3 +1,9 @@
+// X-Large devices (large desktops, less than 1400px)
+@media (max-width: 1399.98px) { 
+    .wrapper-1, .wrapper-2, .wrapper-3{
+        overflow-x: hidden;
+    }
+}
 // Medium devices (tablets, less than 992px)
 @media (max-width: 991.98px) { 
     .wrapper-1, .wrapper-2, .wrapper-3{
@@ -17,8 +23,6 @@
 // Small devices (landscape phones, less than 768px)
 @media (max-width: 767.98px) { 
     .wrapper-1, .wrapper-2, .wrapper-3{
-        // margin-left: 15px !important;
-        // margin-right: 15px !important;
         padding: 40px 20px !important;
         width: 90% !important;
         margin-left: 5%;
@@ -53,3 +57,13 @@
 
     }
 }
+@media (max-width: 575.98px) { 
+    .mob-margin{
+        margin-bottom: 20px;
+    }
+    .employment-table{
+        input{
+            min-width: 200px;
+        }
+    }
+ }
