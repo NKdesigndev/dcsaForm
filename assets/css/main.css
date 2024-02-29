@@ -17,7 +17,11 @@
   src: url("../fonts/Verdana-Bold.woff");
 }
 body, html {
-  height: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  float: left;
+  width: 100%;
 }
 
 body {
@@ -294,7 +298,7 @@ body {
   -webkit-transition: 0.2s;
   -o-transition: 0.2s;
   transition: 0.2s;
-  min-width: 420px;
+  min-width: 24vw;
   max-width: 450px;
   font-weight: normal;
   font-size: 14px;
@@ -313,7 +317,7 @@ body {
   margin-left: 10px !important;
 }
 .application-form .infotooltip-bl:hover .tooltip-info-bl {
-  bottom: 35px;
+  bottom: 100%;
   opacity: 1 !important;
   visibility: visible !important;
 }
@@ -321,11 +325,6 @@ body {
   background: #F6F9FC;
 }
 
-@media (max-width: 1399.98px) {
-  .wrapper-1, .wrapper-2, .wrapper-3 {
-    overflow-x: hidden;
-  }
-}
 @media (max-width: 991.98px) {
   .wrapper-1, .wrapper-2, .wrapper-3 {
     padding: 40px 50px !important;
@@ -338,6 +337,9 @@ body {
   }
   .wrapper-2 .tab-con .nav-item button {
     padding: 10px 18px !important;
+  }
+  .tooltip-info-bl {
+    min-width: 25vw !important;
   }
 }
 @media (max-width: 767.98px) {
@@ -372,6 +374,16 @@ body {
     font-size: 13px;
     overflow-x: auto;
   }
+  .tooltip-info-bl {
+    min-width: 40vw !important;
+    right: -10vw;
+  }
+  .application-form .col-lg-4, .application-form .col-lg-6:nth-child(1) {
+    margin-bottom: 20px;
+  }
+  .application-form .col-lg-4:last-child {
+    margin-bottom: 0px;
+  }
 }
 @media (max-width: 575.98px) {
   .mob-margin {
@@ -379,5 +391,11 @@ body {
   }
   .employment-table input {
     min-width: 200px;
+  }
+  .field-bl .col-lg-4, .field-bl .col-lg-6:nth-child(1) {
+    margin-bottom: 20px;
+  }
+  .field-bl .col-lg-4:last-child {
+    margin-bottom: 0px;
   }
 }/*# sourceMappingURL=main.css.map */

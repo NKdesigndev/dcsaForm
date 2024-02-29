@@ -37,7 +37,9 @@ $secondary-clr: #1E81C6;
 $text-accent: #0C0707;
 
 body, html{
-    height: 100%;
+    height: fit-content;
+    float: left;
+    width: 100%;
 }
 body{
     background: $bg-shade-1 !important;

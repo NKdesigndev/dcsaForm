@@ -259,7 +259,7 @@
     }
     .tooltip-info-bl{
         transition: .2s;
-        min-width: 420px;
+        min-width: 24vw;
         max-width: 450px;
         font-weight: normal;
         font-size: 14px;
@@ -269,6 +269,8 @@
         border-radius: 5px;
         padding: 10px;
         bottom: 0px;
+        // display: flex;
+        // left: 2vw;
         // top: -9vh;
         text-align: center;
         opacity: 0;        
@@ -280,7 +282,7 @@
         margin-left: 10px !important;
 
         &:hover .tooltip-info-bl{
-            bottom: 35px;
+            bottom: 100%;
             opacity: 1 !important;
             visibility: visible !important;
         }
