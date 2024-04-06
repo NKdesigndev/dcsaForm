@@ -335,6 +335,7 @@ body {
   text-transform: capitalize;
 }
 .main-wrapper .userName span {
+  word-wrap: break-word;
   color: #1E81C6;
 }
 .main-wrapper .admin-nav {
