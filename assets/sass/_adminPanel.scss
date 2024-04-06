@@ -5,6 +5,15 @@
     padding: 40px 50px !important;
     margin: 40px 0;
 
+    .userName{
+        font-family: $Verdana-md;
+        color: $text-accent;
+        text-transform: capitalize;
+
+        span{
+            color: $secondary-clr;
+        }
+    }
     .admin-nav{
         margin-bottom: 30px;
         position: sticky;
@@ -110,7 +119,7 @@
 
     .modal-header{
         justify-content: space-between;
-
+        
         span{
             font-size: 1.5rem;    
 

@@ -329,6 +329,14 @@ body {
   padding: 40px 50px !important;
   margin: 40px 0;
 }
+.main-wrapper .userName {
+  font-family: "Verdana";
+  color: #0C0707;
+  text-transform: capitalize;
+}
+.main-wrapper .userName span {
+  color: #1E81C6;
+}
 .main-wrapper .admin-nav {
   margin-bottom: 30px;
   position: sticky;
@@ -505,6 +513,10 @@ body {
     background: #F1F4FC;
     top: 0 !important;
     padding: 20px 0 !important;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
   }
   .admin-sideBar button {
     margin-bottom: 0 !important;
@@ -569,8 +581,13 @@ body {
   .admin-mainWrapper {
     margin-top: 20px !important;
   }
-  .admin-sideBar {
+  .admin-sideBar div:nth-child(2) {
     overflow-x: scroll;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    padding-bottom: 15px;
   }
   .admin-sideBar button {
     font-size: 0.9rem !important;
