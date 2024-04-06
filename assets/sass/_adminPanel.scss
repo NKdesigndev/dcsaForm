@@ -1,0 +1,140 @@
+// Admin panel START
+
+
+.main-wrapper{
+    padding: 40px 50px !important;
+    margin: 40px 0;
+
+    .admin-nav{
+        margin-bottom: 30px;
+        position: sticky;
+        top: 0px;
+        z-index: 100;
+        background-color: $bg-shade-1;
+        padding-top: 10px;
+
+        .hdr-1{
+            font-size: clamp(1.1rem, 2.3vw, 2rem);
+        }
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    .admin-sideBar{
+
+        height: fit-content;
+        position: sticky;
+        top: 90px;
+        
+      
+    }
+    .admin-mainWrapper{
+        background: $bg-white;
+        border-radius: 8px;
+        padding: 15px;
+    }
+}
+// Sidebar buttons
+.tabBtn{
+    // position: sticky;
+    // top: 10px;
+    min-width: 200px;
+    outline: none;
+    border: none;
+    background: none;
+    color: $text-accent;
+    font-size: 15px;
+    text-transform: capitalize;
+    font-family: $Verdana-md;
+    font-weight: 500;
+    padding: 8px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: left;
+    background-color: #e0e5ef;
+    transition: .2s;
+    box-shadow: 0px 3px 0px transparent;
+    
+    &:hover{
+        box-shadow: 0px 3px 0px #920000;
+        background: $primary-clr;
+        color: $bg-white;
+        
+        i{
+            color: $bg-white;
+        }
+    }
+    
+    i{
+        color: $secondary-clr;
+        transition: .2s;
+        font-size: 1.2rem;
+        margin-right: 10px;
+    }
+    
+}
+.activeBtn{
+    box-shadow: 0px 3px 0px #920000;
+    color: $bg-white;
+    background: $primary-clr;
+    
+    i{
+        color: $bg-white;
+    }
+}
+
+.registerModal, .loginModal{
+    font-family: $Verdana-md;
+}
+.loginModal{
+    .btn-close{
+        margin-right: 10px !important;
+    }
+}
+.modal-footer{
+    padding: 20px 15px!important;
+    a{
+        font-size: .9rem;
+        color: $secondary-clr;
+    }
+    .submit-btn{
+        box-shadow: 0px 3px 0px #920000;
+        
+        &:hover{
+            box-shadow: 0px 0px 0px #0e588b;
+        }
+    }
+}
+.btn-close:focus{
+    box-shadow: 0px 0px 0px !important;
+}
+.registerModal{
+
+    .modal-header{
+        justify-content: space-between;
+
+        span{
+            font-size: 1.5rem;    
+
+        }
+        div, h3, p, .tabBtn{
+            min-width: fit-content;
+            width: fit-content;
+            margin-bottom: 0;
+        }
+        .tabBtn{
+            // margin-right: 20px;
+            background-color: $secondary-clr;
+            color: $bg-white;
+            box-shadow: 0px 3px 0px #0e588b;
+            
+            &:hover{
+                background-color: $primary-clr;
+                box-shadow: 0px 0px 0px #0e588b;
+            }
+            i{
+                color: $bg-white;
+            }
+        }
+    }
+}
+
+// Admin panel END

@@ -11,6 +11,7 @@ $CaslonFont: "Adobe Caslon Pro Bold";
     src: url('../fonts/Adobe\ Caslon\ Pro\ Bold.woff');
 }
 
+
 $Verdana-md: "Verdana";
 @font-face {
     font-family: $Verdana-md;
@@ -47,4 +48,5 @@ body{
 
 // Patials files
 @import 'section';
+@import 'adminPanel';
 @import 'responsive';

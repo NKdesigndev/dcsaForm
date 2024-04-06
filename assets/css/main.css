@@ -325,6 +325,145 @@ body {
   background: #F6F9FC;
 }
 
+.main-wrapper {
+  padding: 40px 50px !important;
+  margin: 40px 0;
+}
+.main-wrapper .admin-nav {
+  margin-bottom: 30px;
+  position: sticky;
+  top: 0px;
+  z-index: 100;
+  background-color: #F1F4FC;
+  padding-top: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.main-wrapper .admin-nav .hdr-1 {
+  font-size: clamp(1.1rem, 2.3vw, 2rem);
+}
+.main-wrapper .admin-sideBar {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: sticky;
+  top: 90px;
+}
+.main-wrapper .admin-mainWrapper {
+  background: #fff;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.tabBtn {
+  min-width: 200px;
+  outline: none;
+  border: none;
+  background: none;
+  color: #0C0707;
+  font-size: 15px;
+  text-transform: capitalize;
+  font-family: "Verdana";
+  font-weight: 500;
+  padding: 8px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: left;
+  background-color: #e0e5ef;
+  -webkit-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+  -webkit-box-shadow: 0px 3px 0px transparent;
+          box-shadow: 0px 3px 0px transparent;
+}
+.tabBtn:hover {
+  -webkit-box-shadow: 0px 3px 0px #920000;
+          box-shadow: 0px 3px 0px #920000;
+  background: #C10000;
+  color: #fff;
+}
+.tabBtn:hover i {
+  color: #fff;
+}
+.tabBtn i {
+  color: #1E81C6;
+  -webkit-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+  font-size: 1.2rem;
+  margin-right: 10px;
+}
+
+.activeBtn {
+  -webkit-box-shadow: 0px 3px 0px #920000;
+          box-shadow: 0px 3px 0px #920000;
+  color: #fff;
+  background: #C10000;
+}
+.activeBtn i {
+  color: #fff;
+}
+
+.registerModal, .loginModal {
+  font-family: "Verdana";
+}
+
+.loginModal .btn-close {
+  margin-right: 10px !important;
+}
+
+.modal-footer {
+  padding: 20px 15px !important;
+}
+.modal-footer a {
+  font-size: 0.9rem;
+  color: #1E81C6;
+}
+.modal-footer .submit-btn {
+  -webkit-box-shadow: 0px 3px 0px #920000;
+          box-shadow: 0px 3px 0px #920000;
+}
+.modal-footer .submit-btn:hover {
+  -webkit-box-shadow: 0px 0px 0px #0e588b;
+          box-shadow: 0px 0px 0px #0e588b;
+}
+
+.btn-close:focus {
+  -webkit-box-shadow: 0px 0px 0px !important;
+          box-shadow: 0px 0px 0px !important;
+}
+
+.registerModal .modal-header {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.registerModal .modal-header span {
+  font-size: 1.5rem;
+}
+.registerModal .modal-header div, .registerModal .modal-header h3, .registerModal .modal-header p, .registerModal .modal-header .tabBtn {
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-bottom: 0;
+}
+.registerModal .modal-header .tabBtn {
+  background-color: #1E81C6;
+  color: #fff;
+  -webkit-box-shadow: 0px 3px 0px #0e588b;
+          box-shadow: 0px 3px 0px #0e588b;
+}
+.registerModal .modal-header .tabBtn:hover {
+  background-color: #C10000;
+  -webkit-box-shadow: 0px 0px 0px #0e588b;
+          box-shadow: 0px 0px 0px #0e588b;
+}
+.registerModal .modal-header .tabBtn i {
+  color: #fff;
+}
+
 @media (max-width: 991.98px) {
   .wrapper-1, .wrapper-2, .wrapper-3 {
     padding: 40px 50px !important;
@@ -340,6 +479,35 @@ body {
   }
   .tooltip-info-bl {
     min-width: 25vw !important;
+  }
+  .admin-sideBar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding: 0 !important;
+  }
+  .admin-sideBar button {
+    min-width: -webkit-fit-content !important;
+    min-width: -moz-fit-content !important;
+    min-width: fit-content !important;
+  }
+  .admin-sideBar button:nth-child(2), .admin-sideBar button:nth-child(3) {
+    margin-left: 12px;
+  }
+  .admin-nav {
+    position: unset !important;
+  }
+  .admin-sideBar {
+    z-index: 100;
+    background: #F1F4FC;
+    top: 0 !important;
+    padding: 20px 0 !important;
+  }
+  .admin-sideBar button {
+    margin-bottom: 0 !important;
   }
 }
 @media (max-width: 767.98px) {
@@ -397,5 +565,28 @@ body {
   }
   .field-bl .col-lg-4:last-child {
     margin-bottom: 0px;
+  }
+  .admin-mainWrapper {
+    margin-top: 20px !important;
+  }
+  .admin-sideBar {
+    overflow-x: scroll;
+  }
+  .admin-sideBar button {
+    font-size: 0.9rem !important;
+  }
+  .modal-header {
+    font-size: 0.9rem;
+    overflow-x: scroll;
+  }
+  .modal-header::-webkit-scrollbar {
+    display: none;
+  }
+  .modal-header h5 {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .modal-header span {
+    font-size: 1.2rem !important;
   }
 }/*# sourceMappingURL=main.css.map */

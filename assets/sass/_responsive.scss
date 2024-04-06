@@ -21,6 +21,32 @@
     .tooltip-info-bl{
         min-width: 25vw !important;
     }
+    .admin-sideBar{
+        display: flex;
+        align-items: center;
+        // justify-content: space-between;
+        padding: 0 !important;
+        
+        button{
+            min-width: fit-content !important;
+        }
+        button:nth-child(2), button:nth-child(3){
+            margin-left: 12px;
+        }
+    }
+    .admin-nav{
+        position: unset !important;
+    }
+    .admin-sideBar{
+        z-index: 100;
+        background: $bg-shade-1;
+        top: 0 !important;
+        padding: 20px 0 !important;
+
+        button{
+            margin-bottom: 0 !important;
+        }
+    }
 }
 
 // Small devices (landscape phones, less than 768px)
@@ -87,6 +113,31 @@
         }
         .col-lg-4:last-child{
             margin-bottom: 0px;
+        }
+    }
+    .admin-mainWrapper{
+        margin-top: 20px !important;
+    }
+    .admin-sideBar{
+        overflow-x: scroll;
+        button{
+            font-size: .9rem !important;
+        }
+    }
+    .modal-header{
+        font-size: .9rem;   
+        overflow-x: scroll;
+        
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        
+        h5{
+            font-weight: 600;
+            font-size: 1rem;   
+        }
+        span{
+            font-size: 1.2rem !important;   
         }
     }
  }
