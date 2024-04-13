@@ -1,0 +1,150 @@
+// X-Large devices (large desktops, less than 1400px)
+@media (max-width: 1399.98px) { 
+    // .wrapper-1, .wrapper-2, .wrapper-3{
+    //     overflow-x: hidden;
+    // }
+}
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) { 
+    .wrapper-1, .wrapper-2, .wrapper-3{
+        padding: 40px 50px !important;
+    }
+    .wrapper-2 .tab-con{
+        padding: 15px 20px;
+        li{
+            margin: 6px;
+        }
+        .nav-item button{
+            padding: 10px 18px !important;
+        }
+    }
+    .tooltip-info-bl{
+        min-width: 25vw !important;
+    }
+    .admin-sideBar{
+        display: flex;
+        align-items: center;
+        // justify-content: space-between;
+        padding: 0 !important;
+        
+        button{
+            min-width: fit-content !important;
+        }
+        button:nth-child(2), button:nth-child(3){
+            margin-left: 12px;
+        }
+    }
+    .admin-nav{
+        position: unset !important;
+    }
+    .admin-sideBar{
+        z-index: 100;
+        background: $bg-shade-1;
+        top: 0 !important;
+        padding: 20px 0 !important;
+        flex-direction: column;
+
+        button{
+            margin-bottom: 0 !important;
+        }
+    }
+}
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) { 
+    .wrapper-1, .wrapper-2, .wrapper-3{
+        padding: 40px 20px !important;
+        width: 90% !important;
+        margin-left: 5%;
+        // margin-bottom: 15px;
+    }
+    .msg-con, .msg-con-2{
+        padding: 15px;
+    }
+    .msg-con-2 .des-list li{
+        font-size: 15px;
+    }
+    .txt-des{
+        line-height: 25px;
+        font-size: 15px;
+    }
+    .tab-con .mob-scroll{
+        overflow-x: scroll;
+        width: 600px;
+        display: flex;
+
+        li{
+            min-width: 100px;
+            max-width: 120px;
+        }
+    }
+    .wrapper-2 {
+        .tab-con .tab-content .tab-pane{
+            padding: 0px !important;
+            font-size: 13px;
+            overflow-x: auto;
+        }
+
+    }
+    .tooltip-info-bl{
+        min-width: 40vw !important;
+        right: -10vw;
+    }
+    .application-form{
+        .col-lg-4, .col-lg-6:nth-child(1){
+            margin-bottom: 20px;
+        }
+        .col-lg-4:last-child{
+            margin-bottom: 0px;
+        }
+    }
+}
+@media (max-width: 575.98px) { 
+    .mob-margin{
+        margin-bottom: 20px;
+    }
+    .employment-table{
+        input{
+            min-width: 200px;
+        }
+    }
+    .field-bl{
+        .col-lg-4, .col-lg-6:nth-child(1){
+            margin-bottom: 20px;
+        }
+        .col-lg-4:last-child{
+            margin-bottom: 0px;
+        }
+    }
+    .admin-mainWrapper{
+        margin-top: 20px !important;
+    }
+    .admin-sideBar div:nth-child(2){
+        overflow-x: scroll;
+        display: flex;
+        width: 100%;
+        padding-bottom: 15px;
+    }
+    .admin-sideBar{
+        // overflow-x: scroll;
+        button{
+            font-size: .9rem !important;
+        }
+    }
+    .modal-header{
+        font-size: .9rem;   
+        overflow-x: scroll;
+        
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        
+        h5{
+            font-weight: 600;
+            font-size: 1rem;   
+        }
+        span{
+            font-size: 1.2rem !important;   
+        }
+    }
+ }

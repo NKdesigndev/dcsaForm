@@ -1,0 +1,52 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+// Fonts
+$CaslonFont: "Adobe Caslon Pro Bold";
+
+@font-face {
+    font-family: $CaslonFont;
+    src: url('../fonts/Adobe\ Caslon\ Pro\ Bold.woff');
+}
+
+
+$Verdana-md: "Verdana";
+@font-face {
+    font-family: $Verdana-md;
+    src: url('../fonts/Verdana.woff');
+}
+
+$Verdana-md-bl: "Verdana bold";
+@font-face {
+    font-family: $Verdana-md-bl;
+    src: url('../fonts/Verdana-Bold.woff');
+}
+
+// variables
+$wrapper-padding: 40px 50px !important; 
+
+// Colors
+$bg-shade-1: #F1F4FC;
+$bg-shade-2: #F6F9FC;
+$bg-shade-3: #4D4D4D;
+$border-clr: #DFE3ED;
+$bg-white: #fff;
+$primary-clr: #C10000;
+$secondary-clr: #1E81C6;
+$text-accent: #0C0707;
+
+body, html{
+    height: fit-content;
+    float: left;
+    width: 100%;
+}
+body{
+    background: $bg-shade-1 !important;
+}
+
+// Patials files
+@import 'section';
+@import 'adminPanel';
+@import 'responsive';
