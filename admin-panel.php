@@ -11,8 +11,6 @@
 
         $user = $result->fetch_assoc();
     }
-
-    // print_r($_SESSION)
 ?>
 
     <?php 

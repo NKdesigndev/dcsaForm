@@ -19,9 +19,7 @@
     ?>
 
     <?php
-        if (isset($user)) {
-            header("Location: admin-panel.php");
-        } else {
+        if (!isset($user)) {
             header("Location: login.php");
         }
     ?>
@@ -43,13 +41,13 @@
         
         <!-- Form START -->
         <div class="container mt-5 application-form">
-            <form action="admin_panel.html">
+            <form action="functions.php" method="POST" enctype="multipart/form-data">
                 <!-- 1. Name in full & Designation of the nominee* & 2. DOB -->
                 <div class="row field-bl">
                     <!-- Nominee Name -->
                     <div class="col-lg-6 col-md-6 mob-margin">
                         <label for="nomineeName" class="form-label">1. Name in full & Designation of the nominee <span class="required-star">*</span></label>
-                        <input type="text" class="form-control" id="nomineeName" placeholder="Name" name="nomineeName" required>
+                        <input type="text" class="form-control" id="nomineeName" placeholder="Name" name="name" required>
                     </div>
         
                     <!-- DOB -->
@@ -63,16 +61,17 @@
                 <div class="row field-bl">
                     <label class="form-label">3. Age as on 31st Dec 2023:</label><br>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-12">
-                        <select class="form-select" id="ageYears" name="ageYears">
+                        <input type="number" class="form-control" name="age">
+                        <!-- <select class="form-select" id="ageYears" name="age">
                             <option value="" selected disabled>Year</option>
                             <script>
                                 for (var i =  1974; i <= 2023; i++) {
                                     document.write('<option value="' + i + '">' + i + '</option>');
                                 }
                             </script>
-                        </select>
+                        </select> -->
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+                    <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-12">
                         <select class="form-select" id="ageMonths" name="ageMonths">
                             <option value="" selected disabled>Month</option>
                             <script>
@@ -81,8 +80,8 @@
                                 }
                             </script>
                         </select>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+                    </div> -->
+                    <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-12">
                         <select class="form-select" id="ageDays" name="ageDays">
                             <option value="" selected disabled>Day</option>
                             <script>
@@ -92,7 +91,7 @@
                             </script>
                         </select>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- 4. Nationality: & 5. Gender -->
                 <div class="row field-bl">
@@ -129,12 +128,12 @@
                                 <p class="infotooltip">i</p><p class="tooltip-info-bl">(Nominee must be working either in Panjab University Chandigarh and its affiliated colleges / Central University of Punjab / Member institutions of CRICK, State Universities & Research institutions of Punjab)</p>
                             </div>
                         </div>
-                        <textarea class="form-control" id="officialAddress" name="officialAddress" rows="4" placeholder="Enter official address with contact details"></textarea>
+                        <textarea class="form-control" id="officialAddress" name="official_address" rows="4" placeholder="Enter official address with contact details"></textarea>
                     </div>
                     
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <label for="residentialAddress" class="form-label">(b) Residential Address:</label>
-                        <textarea class="form-control" id="residentialAddress" name="residentialAddress" rows="4" placeholder="Enter residential address"></textarea>
+                        <textarea class="form-control" id="residentialAddress" name="residential_address" rows="4" placeholder="Enter residential address"></textarea>
                     </div>
                 </div>
             
@@ -142,7 +141,7 @@
                 <div class="row field-bl">
                     <div class="col-lg-12">
                         <label for="fieldOfSpecialization" class="form-label">7. Nominee's field of specialization: <br><span class="sub-label-info">(Best suited among the major five fields of the research mentioned in the evaluation criteria) </span></label>
-                        <textarea class="form-control" id="fieldOfSpecialization" name="fieldOfSpecialization" rows="3" placeholder="Enter field of specialization..."></textarea>
+                        <textarea class="form-control" id="fieldOfSpecialization" name="field_of_specialization" rows="3" placeholder="Enter field of specialization..."></textarea>
                     </div>
                 </div>
                 
@@ -161,23 +160,25 @@
                           </h2>
                           <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
+
+                                <input type="hidden" name="academic_qualification[bachelor][type]" value="bachelor">
                                 
                                 <div class="row field-bl">
                                     <div class="col-lg-6 col-md-6 mob-margin">
                                         <label for="course" class="form-label">Name of the course:</label>
-                                        <select class="form-select" id="course" name="course">
+                                        <select class="form-select" id="course" name="academic_qualification[bachelor][course_id]">
                                             <option value="" disabled selected>Select Course</option>
-                                            <option value="bsc">B.Sc.</option>
-                                            <option value="msc">M.Sc.</option>
+                                            <option value="1">B.Sc.</option>
+                                            <option value="2">M.Sc.</option>
                                         </select>
                                     </div>
                         
                                     <div class="col-lg-6 col-md-6">
                                         <label for="university" class="form-label">Name of the University:</label>
-                                        <select class="form-select" id="university" name="university">
+                                        <select class="form-select" id="university" name="academic_qualification[bachelor][university_id]">
                                             <option value="" disabled selected>Select University</option>
-                                            <option value="panjab">Panjab University</option>
-                                            <option value="xyz">XYZ University</option>
+                                            <option value="1">Panjab University</option>
+                                            <option value="2">XYZ University</option>
                                         </select>
                                     </div>
                                 </div>
@@ -185,7 +186,7 @@
                                 <div class="row field-bl">
                                     <div class="col-lg-6 col-md-6 mob-margin">
                                         <label for="year" class="form-label">Year of Passing:</label>
-                                        <select class="form-select" id="year" name="year">
+                                        <select class="form-select" id="year" name="academic_qualification[bachelor][passing_year]">
                                             <option value="" disabled selected>Select Year</option>
                                             <option value="2020">2020</option>
                                             <option value="2021">2021</option>
@@ -194,7 +195,7 @@
                         
                                     <div class="col-lg-6 col-md-6 ">
                                         <label for="division" class="form-label">Division/Class/CGP:</label>
-                                        <select class="form-select" id="division" name="division">
+                                        <select class="form-select" id="division" name="academic_qualification[bachelor][division_cgp]">
                                             <option value="" disabled selected>Select Division</option>
                                             <option value="first">First</option>
                                             <option value="second">Second</option>
@@ -204,7 +205,7 @@
 
                                 <div class="col-lg-12 field-bl">
                                     <label for="additionalParticulars" class="form-label">Additional Particulars:</label>
-                                    <textarea class="form-control" id="additionalParticulars" name="additionalParticulars" rows="3"></textarea>
+                                    <textarea class="form-control" id="additionalParticulars" name="academic_qualification[bachelor][additional_particulars]" rows="3"></textarea>
                                 </div>
 
                             </div>
@@ -221,22 +222,24 @@
                           <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
 
+                                <input type="hidden" name="academic_qualification[master][type]" value="master">
+
                                 <div class="row field-bl">
                                     <div class="col-lg-6">
                                         <label for="course" class="form-label">Name of the course:</label>
-                                        <select class="form-select" id="course" name="course">
+                                        <select class="form-select" id="course" name="academic_qualification[master][course_id]">
                                             <option value="" disabled selected>Select Course</option>
-                                            <option value="bsc">B.Sc.</option>
-                                            <option value="msc">M.Sc.</option>
+                                            <option value="1">B.Sc.</option>
+                                            <option value="2">M.Sc.</option>
                                         </select>
                                     </div>
                         
                                     <div class="col-lg-6">
                                         <label for="university" class="form-label">Name of the University:</label>
-                                        <select class="form-select" id="university" name="university">
+                                        <select class="form-select" id="university" name="academic_qualification[master][university_id]">
                                             <option value="" disabled selected>Select University</option>
-                                            <option value="panjab">Panjab University</option>
-                                            <option value="xyz">XYZ University</option>
+                                            <option value="1">Panjab University</option>
+                                            <option value="2">XYZ University</option>
                                         </select>
                                     </div>
                                 </div>
@@ -244,7 +247,7 @@
                                 <div class="row field-bl">
                                     <div class="col-lg-6">
                                         <label for="year" class="form-label">Year of Passing:</label>
-                                        <select class="form-select" id="year" name="year">
+                                        <select class="form-select" id="year" name="academic_qualification[master][passing_year]">
                                             <option value="" disabled selected>Select Year</option>
                                             <option value="2020">2020</option>
                                             <option value="2021">2021</option>
@@ -253,7 +256,7 @@
                         
                                     <div class="col-lg-6">
                                         <label for="division" class="form-label">Division/Class/CGP:</label>
-                                        <select class="form-select" id="division" name="division">
+                                        <select class="form-select" id="division" name="academic_qualification[master][division_cgp]">
                                             <option value="" disabled selected>Select Division</option>
                                             <option value="first">First</option>
                                             <option value="second">Second</option>
@@ -263,7 +266,7 @@
 
                                 <div class="col-lg-12 field-bl">
                                     <label for="additionalParticulars" class="form-label">Additional Particulars:</label>
-                                    <textarea class="form-control" id="additionalParticulars" name="additionalParticulars" rows="3"></textarea>
+                                    <textarea class="form-control" id="additionalParticulars" name="academic_qualification[master][additional_particulars]" rows="3"></textarea>
                                 </div>
                                 
                             </div>
@@ -277,24 +280,27 @@
                                 (C) M.Phil. / equivalent
                             </button>
                           </h2>
+
+                          <input type="hidden" name="academic_qualification[mphil][type]" value="mphil">
+                          
                           <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <div class="row field-bl">
                                     <div class="col-lg-6">
                                         <label for="course" class="form-label">Name of the course:</label>
-                                        <select class="form-select" id="course" name="course">
+                                        <select class="form-select" id="course" name="academic_qualification[mphil][course_id]">
                                             <option value="" disabled selected>Select Course</option>
-                                            <option value="bsc">B.Sc.</option>
-                                            <option value="msc">M.Sc.</option>
+                                            <option value="1">B.Sc.</option>
+                                            <option value="2">M.Sc.</option>
                                         </select>
                                     </div>
                         
                                     <div class="col-lg-6">
                                         <label for="university" class="form-label">Name of the University:</label>
-                                        <select class="form-select" id="university" name="university">
+                                        <select class="form-select" id="university" name="academic_qualification[mphil][university_id]">
                                             <option value="" disabled selected>Select University</option>
-                                            <option value="panjab">Panjab University</option>
-                                            <option value="xyz">XYZ University</option>
+                                            <option value="1">Panjab University</option>
+                                            <option value="2">XYZ University</option>
                                         </select>
                                     </div>
                                 </div>
@@ -302,7 +308,7 @@
                                 <div class="row field-bl">
                                     <div class="col-lg-6">
                                         <label for="year" class="form-label">Year of Passing:</label>
-                                        <select class="form-select" id="year" name="year">
+                                        <select class="form-select" id="year" name="academic_qualification[mphil][passing_year]">
                                             <option value="" disabled selected>Select Year</option>
                                             <option value="2020">2020</option>
                                             <option value="2021">2021</option>
@@ -311,7 +317,7 @@
                         
                                     <div class="col-lg-6">
                                         <label for="division" class="form-label">Division/Class/CGP:</label>
-                                        <select class="form-select" id="division" name="division">
+                                        <select class="form-select" id="division" name="academic_qualification[mphil][division_cgp]">
                                             <option value="" disabled selected>Select Division</option>
                                             <option value="first">First</option>
                                             <option value="second">Second</option>
@@ -321,7 +327,7 @@
 
                                 <div class="col-lg-12 field-bl">
                                     <label for="additionalParticulars" class="form-label">Additional Particulars:</label>
-                                    <textarea class="form-control" id="additionalParticulars" name="additionalParticulars" rows="3"></textarea>
+                                    <textarea class="form-control" id="additionalParticulars" name="academic_qualification[mphil][additional_particulars]" rows="3"></textarea>
                                 </div>
 
                             </div>
@@ -340,11 +346,11 @@
                 <div class="row field-bl">
                     <div class="col-lg-6 col-md-6 col-sm-6 mob-margin">
                         <label for="phdThesisTitle" class="form-label">9. Title of the Ph.D. thesis:</label>
-                        <textarea class="form-control" id="phdThesisTitle" name="phdThesisTitle" rows="3" placeholder="Enter the title of the Ph.D. thesis"></textarea>
+                        <textarea class="form-control" id="phdThesisTitle" name="phd_thesis_title" rows="3" placeholder="Enter the title of the Ph.D. thesis"></textarea>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <label for="joiningDate" class="form-label">10. Date of joining the Institution, where currently working:</label>
-                        <input type="date" class="form-control" id="joiningDate" name="joiningDate">
+                        <input type="date" class="form-control" id="joiningDate" name="joining_date">
                     </div>
                 </div>
 
@@ -430,12 +436,12 @@
                 <div class="row field-bl">
                     <div class="col-lg-6 col-md-6 mob-margin">
                         <label for="awardsDetails" class="form-label">12. Details of awards received so far:</label>
-                        <textarea class="form-control" id="awardsDetails" name="awardsDetails" rows="5" placeholder="Enter details of awards received"></textarea>
+                        <textarea class="form-control" id="awardsDetails" name="awards_details" rows="5" placeholder="Enter details of awards received"></textarea>
                     </div>
     
                     <div class="col-lg-6 col-md-6 ">
                         <label for="contributionsTextArea" class="form-label">13. Significant contributions to science and/or technology development by the nominee based on the work done only in India:</label>
-                        <textarea class="form-control" id="contributionsTextArea" name="contributionsTextArea" rows="5" maxlength="200" placeholder="Enter significant contributions"></textarea>
+                        <textarea class="form-control" id="contributionsTextArea" name="contributions_to_science" rows="5" maxlength="200" placeholder="Enter significant contributions"></textarea>
                         <small class="form-text text-muted">Maximum 200 words.</small>
                     </div>                   
                 </div>
@@ -444,12 +450,12 @@
                 <div class="row field-bl">
                     <div class="col-lg-6 col-md-6 mob-margin">
                         <label for="socialImpact" class="form-label">14. Social impact of the contributions in the field concerned:</label>
-                        <textarea class="form-control" id="socialImpact" name="socialImpact" rows="3" placeholder="Enter social impact information here"></textarea>
+                        <textarea class="form-control" id="socialImpact" name="contribution_social_imapact" rows="3" placeholder="Enter social impact information here"></textarea>
                     </div>
                 
                     <div class="col-lg-6 col-md-6">
                         <label for="technologySectors" class="form-label">15. Names of the sectors in which the technology (ies) developed has (have) been used:</label>
-                        <textarea class="form-control" id="technologySectors" name="technologySectors" rows="3" placeholder="Enter names of sectors here"></textarea>
+                        <textarea class="form-control" id="technologySectors" name="technology_sectors" rows="3" placeholder="Enter names of sectors here"></textarea>
                     </div>
                 </div>
 
@@ -457,12 +463,12 @@
                 <div class="row field-bl">
                       <div class="col-lg-6 col-md-6 mob-margin">
                         <label for="lectureDetails" class="form-label">16. Has the nominee delivered invited lecture(s) in India / abroad and/ or chaired any scientific International Conference Symposium (give details):</label>
-                        <textarea class="form-control" id="lectureDetails" name="lectureDetails" rows="5" placeholder="Provide details of invited lectures, conferences, or symposiums"></textarea>
+                        <textarea class="form-control" id="lectureDetails" name="lectures_delivered" rows="5" placeholder="Provide details of invited lectures, conferences, or symposiums"></textarea>
                     </div>
 
                     <div class="col-lg-6 col-md-6">
                         <label for="foreignAssignments" class="form-label">17. Significant foreign assignments / foreign collaboration as evident from joint projects and joint publications:</label>
-                        <textarea class="form-control" id="foreignAssignments" name="foreignAssignments" rows="5" placeholder="Describe any significant foreign assignments or collaborations"></textarea>
+                        <textarea class="form-control" id="foreignAssignments" name="foreign_assignments" rows="5" placeholder="Describe any significant foreign assignments or collaborations"></textarea>
                     </div>
                 </div>
 
@@ -470,7 +476,7 @@
                 <div class="row field-bl">
                     <div class="col-lg-12 field-bl">
                         <label for="researchSummary" class="form-label">18. Summary of research publications: <br><span class="sub-label-info">(Kindly refer to Eligibility conditions and include publications of the work done only in India):</span></label>
-                        <textarea class="form-control" id="researchSummary" rows="4" placeholder="Enter your research publications summary here..."></textarea>
+                        <textarea class="form-control" id="researchSummary" rows="4" name="research_summary" placeholder="Enter your research publications summary here..."></textarea>
                     </div>
                     <div class="row field-bl">
                         <div class="col-lg-6">
@@ -480,25 +486,25 @@
                                     <p class="infotooltip">i</p><p class="tooltip-info-bl">(excluding paid journals)</p>
                                 </div>
                             </div>
-                            <input type="number" class="form-control" id="sciJournalPapers" name="sciJournalPapers" placeholder="Enter the number" required>
+                            <input type="number" class="form-control" id="sciJournalPapers" name="sci_journals_papers_number" placeholder="Enter the number" required>
                         </div>
                         
                         <div class="col-lg-6">
                             <label for="citationsInput" class="form-label">(b) Number of Citations as per SCOPUS:</label>
-                            <input type="number" class="form-control" id="citationsInput" placeholder="Enter the number of citations">                          
+                            <input type="number" class="form-control" name="citations_number" id="citationsInput" placeholder="Enter the number of citations">                          
                         </div>
                     </div>
                     
                     <div class="row field-bl">
                         <div class="col-lg-4">
                             <label for="cumulativeImpactFactor" class="form-label">(c) Cumulative Impact Factor:</label>
-                            <input type="text" class="form-control" id="cumulativeImpactFactor" placeholder="Enter Cumulative Impact Factor">
+                            <input type="text" class="form-control" name="cumulative_impact_factor" id="cumulativeImpactFactor" placeholder="Enter Cumulative Impact Factor">
                         </div>
                         
                         <div class="col-lg-4">
                             <label for="scopusHIndex" class="form-label">(d) h–index as per SCOPUS:</label>
                             <div class="input-group">
-                                <input type="number" class="form-control" id="scopusHIndex" placeholder="Enter h-index" aria-label="SCOPUS h-index" aria-describedby="scopusText">
+                                <input type="number" class="form-control" id="scopusHIndex" name="h_index" placeholder="Enter h-index" aria-label="SCOPUS h-index" aria-describedby="scopusText">
                                 <label class="input-group-text" for="scopusHIndex" id="scopusText">as per SCOPUS</label>
                             </div>
                         </div>
@@ -509,7 +515,7 @@
                                     <p class="infotooltip">i</p><p class="tooltip-info-bl">(i) Number... <br>(ii) Commercial Value </p>
                                 </div>
                             </div>
-                            <input type="text" class="form-control" id="patentNumber" placeholder="Enter patent number" required>
+                            <input type="text" class="form-control" id="patentNumber" name="patients" placeholder="Enter patent number" required>
                         </div>
                     </div>
                 </div>
@@ -523,7 +529,7 @@
                                 <p class="infotooltip">i</p><p class="tooltip-info-bl">(Please upload the file preferably in tabular form to include 1. Title of the Publication 2. Authors (as per sequence) 3. Year of publication 4. Name of the Journal/Book 5. Volume; Page Number/Book Publisher 6. Impact factor of the journal 7. Number of Citations)</p>
                             </div>
                         </div>
-                        <input type="file" class="form-control" id="publicationFile" name="publicationFile" required>
+                        <input type="file" class="form-control" id="publicationFile" name="publication_file_url" required>
                     </div>
                 </div>
 
@@ -533,29 +539,29 @@
                     <label for="" class="form-label">20. Details of research supervision at PhD Level:</label>
                     <div class="col-lg-3 col-md-6 col-sm-6 field-bl">
                         <label for="studentName" class="form-label">Name of the Student</label>
-                        <input type="text" class="form-control" id="studentName" placeholder="Enter student's name" required>
+                        <input type="text" class="form-control" id="studentName" name="research_supervision_details[student_name]" placeholder="Enter student's name" required>
                     </div>
                 
                     <!-- Thesis Title -->
                     <div class="col-lg-3 col-md-6 col-sm-6 field-bl">
                         <label for="thesisTitle" class="form-label">Thesis Title</label>
-                        <input type="text" class="form-control" id="thesisTitle" placeholder="Enter thesis title" required>
+                        <input type="text" class="form-control" id="thesisTitle" name="research_supervision_details[thesis_title]" placeholder="Enter thesis title" required>
                     </div>
                 
                     <!-- Year -->
                     <div class="col-lg-3 col-md-6 col-sm-6 field-bl">
                         <label for="year" class="form-label">Year</label>
-                        <input type="number" class="form-control" id="year" placeholder="Enter the year" required>
+                        <input type="number" class="form-control" id="year" name="research_supervision_details[year]" placeholder="Enter the year" required>
                     </div>
                 
                     <!-- Current Status of Student -->
                     <div class="col-lg-3 col-md-6 col-sm-6 field-bl">
                         <label for="currentStatus" class="form-label">Current Status of Student</label>
-                        <select class="form-select" id="currentStatus" required>
-                        <option value="" selected disabled>Select current status</option>
-                        <option value="In Progress">In Progress</option>
-                        <option value="Completed">Completed</option>
-                        <option value="On Hold">On Hold</option>
+                        <select class="form-select" id="currentStatus" name="research_supervision_details[current_status]" required>
+                            <option value="" selected disabled>Select current status</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Completed">Completed</option>
+                            <option value="On Hold">On Hold</option>
                         </select>
                     </div>
                 </div>
@@ -577,29 +583,29 @@
                                 <tr>
                                     <th scope="row">1</th>
                                     <td>
-                                        <input type="text" class="form-control" id="scientist1Name" name="scientist1Name" required>
+                                        <input type="text" class="form-control" id="scientist1Name" name="scientist[0][name]" required>
                                     </td>
-                                    <td><input type="text" class="form-control" id="scientist1Address" name="scientist1Address" required></td>
-                                    <td><input type="text" class="form-control" id="scientist1Specialization" name="scientist1Specialization" required></td>
-                                    <td><input type="email" class="form-control" id="scientist1Email" name="scientist1Email" required></td>
+                                    <td><input type="text" class="form-control" id="scientist1Address" name="scientist[0][address]" required></td>
+                                    <td><input type="text" class="form-control" id="scientist1Specialization" name="scientist[0][specialization]" required></td>
+                                    <td><input type="email" class="form-control" id="scientist1Email" name="scientist[0][email]" required></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">2</th>
                                     <td>
-                                        <input type="text" class="form-control" id="scientist1Name" name="scientist1Name" required>
+                                        <input type="text" class="form-control" id="scientist1Name" name="scientist[1][name]" required>
                                     </td>
-                                    <td><input type="text" class="form-control" id="scientist1Address" name="scientist1Address" required></td>
-                                    <td><input type="text" class="form-control" id="scientist1Specialization" name="scientist1Specialization" required></td>
-                                    <td><input type="email" class="form-control" id="scientist1Email" name="scientist1Email" required></td>
+                                    <td><input type="text" class="form-control" id="scientist1Address" name="scientist[1][address]" required></td>
+                                    <td><input type="text" class="form-control" id="scientist1Specialization" name="scientist[1][specialization]" required></td>
+                                    <td><input type="email" class="form-control" id="scientist1Email" name="scientist[1][email]" required></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">3</th>
                                     <td>
-                                        <input type="text" class="form-control" id="scientist1Name" name="scientist1Name" required>
+                                        <input type="text" class="form-control" id="scientist1Name" name="scientist[2][name]" required>
                                     </td>
-                                    <td><input type="text" class="form-control" id="scientist1Address" name="scientist1Address" required></td>
-                                    <td><input type="text" class="form-control" id="scientist1Specialization" name="scientist1Specialization" required></td>
-                                    <td><input type="email" class="form-control" id="scientist1Email" name="scientist1Email" required></td>
+                                    <td><input type="text" class="form-control" id="scientist1Address" name="scientist[2][address]" required></td>
+                                    <td><input type="text" class="form-control" id="scientist1Specialization" name="scientist[2][specialization]" required></td>
+                                    <td><input type="email" class="form-control" id="scientist1Email" name="scientist[2][email]" required></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -610,12 +616,12 @@
                 <div class="row field-bl">
                     <div class="col-lg-6 col-md-6 mob-margin">
                         <label for="additionalPoints" class="form-label">22. Any other point(s), which is/are not covered above:</label>
-                        <textarea class="form-control" id="additionalPoints" rows="4" placeholder="Enter additional points here..."></textarea>
+                        <textarea class="form-control" id="additionalPoints" rows="4" name="others" placeholder="Enter additional points here..."></textarea>
                     </div>
 
                     <div class="col-lg-6 col-md-6">
                         <label for="selectOptions" class="form-label">Certified that information contained is correct.</label>
-                        <select class="form-select" id="selectOptions">
+                        <select class="form-select" name="confirmation" id="selectOptions">
                             <option value="" disabled selected>Choose</option>
                             <option value="certified">Yes, that's correct</option>
                             <option value="incorrect">No, that's incorrect</option>
@@ -627,7 +633,7 @@
                 <div class="row field-bl">
                     <div class="col-lg-6 col-md-12 mob-margin">
                         <label for="consentNominee" class="form-label">23. Consent of Nominee:</label>
-                        <input type="text" class="form-control" id="consentNominee" placeholder="Enter consent information">
+                        <input type="text" class="form-control" id="consentNominee" name="consent" placeholder="Enter consent information">
                     </div>
 
                     <div class="col-lg-6 col-md-12">
@@ -635,13 +641,13 @@
                             <!-- Date Input -->
                             <div class="col-lg-6 col-md-6 col-sm-6 mob-margin">
                                 <label for="dateInput" class="form-label">Date:</label>
-                                <input type="date" class="form-control" id="dateInput" placeholder="Select date">
+                                <input type="date" class="form-control" name="date" id="dateInput" placeholder="Select date">
                             </div>
     
                             <!-- Place Input -->
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <label for="placeInput" class="form-label">Place:</label>
-                                <input type="text" class="form-control" id="placeInput" placeholder="Enter place">
+                                <input type="text" class="form-control" name="place" id="placeInput" placeholder="Enter place">
                             </div>
                         </div>
                     </div>
@@ -651,25 +657,25 @@
                             <!-- Nominator's Name -->
                           <div class="col-lg-3 col-md-6 mob-margin">
                               <label for="nominatorName" class="form-label">Nominator's Name</label>
-                              <input type="text" class="form-control" id="nominatorName" placeholder="Enter Nominator's Name" required>
+                              <input type="text" class="form-control" id="nominatorName" name="nominator_name" placeholder="Enter Nominator's Name" required>
                           </div>
                       
                           <!-- Designation -->
                           <div class="col-lg-3 col-md-6 mob-margin">
                               <label for="designation" class="form-label">Designation</label>
-                              <input type="text" class="form-control" id="designation" placeholder="Enter Designation" required>
+                              <input type="text" class="form-control" id="designation" name="nominator_designation" placeholder="Enter Designation" required>
                           </div>
                       
                           <!-- Complete Address -->
                           <div class="col-lg-3 col-md-6 mob-margin">
                               <label for="completeAddress" class="form-label">Complete Address</label>
-                              <textarea class="form-control" id="completeAddress" placeholder="Enter Complete Address" rows="1" required></textarea>
+                              <textarea class="form-control" id="completeAddress" name="nominator_address" placeholder="Enter Complete Address" rows="1" required></textarea>
                           </div>
                       
                           <!-- Email Address -->
                           <div class="col-lg-3 col-md-6">
                               <label for="emailAddress" class="form-label">Email Address</label>
-                              <input type="email" class="form-control" id="emailAddress" placeholder="Enter Email Address" required>
+                              <input type="email" class="form-control" id="emailAddress" name="nominator_email" placeholder="Enter Email Address" required>
                           </div>
 
                         </div>
@@ -678,7 +684,7 @@
                     <div class="row field-bl">
                         <div class="col-lg-12">
                             <label for="fileInput" class="form-label">Note: May attach any document as annexure, if required.</label>
-                            <input type="file" class="form-control" id="fileInput">
+                            <input type="file" class="form-control" name="annexure_file_url" id="fileInput">
                         </div>
                     </div>
 
