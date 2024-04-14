@@ -1,11 +1,7 @@
 <?php
 
-require('db-connection.php');
+require(__dir__ . '/../config/db-connection.php');
 
-$request = $_POST;
-
-
-saveNomineeDetails($request);
 
 function saveNomineeDetails($request) {
     
@@ -257,6 +253,68 @@ function uploadFile($file, $path) {
         }
 
 }
+
+function login($request) {
+
+    global $mysqli;
+    $queryString = [];
+    
+    if (empty(trim($_POST["nomineeEmail"]))) {
+        $email_err = "Please enter email.";
+    } else {
+        $email = trim($_POST["nomineeEmail"]);
+    }
+
+    if (empty(trim($_POST["nomineePassword"]))) {
+        $password_err = "Please enter your password.";
+    } else {
+        $password = trim($_POST["nomineePassword"]);
+    }
+
+    if (empty($email_err) && empty($password_err)) {
+        $sql = "SELECT id, email, name, form_submited, password_hash FROM users WHERE email = ?";
+
+        if ($stmt = $mysqli->prepare($sql)) {
+            $stmt->bind_param("s", $param_email);
+            $param_email = $email;
+
+            if ($stmt->execute()) {
+                $result = $stmt->get_result();
+
+                if ($result->num_rows == 1) {
+                    $row = $result->fetch_assoc();
+                    if (password_verify($password, $row['password_hash'])) {
+                        session_start();
+
+                        $_SESSION["loggedin"] = true;
+                        $_SESSION["user"] = $row;
+
+                        
+                        if($_SESSION['user']['form_submited']) {
+                            header("location: ../admin-panel.php");
+                        }
+                        else {
+                            header("location: ../application-form.php");
+                        }
+                    } else {
+                        $queryString = http_build_query(["error" => "Invalid email or password."]);
+                    }
+                } else {
+                    $queryString = http_build_query(["error" => "Invalid email or password."]);
+                }
+            } else {
+                $queryString = http_build_query(["error" => "Oops! Something went wrong. Please try again later."]);
+            }
+            $stmt->close();
+        }
+    }
+    
+    if(count($queryString))
+        header("location: ../login.php?$queryString");
+
+    $mysqli->close();
+}
+
 
 function dd($data) {
     echo "<pre>";

@@ -1,27 +1,7 @@
     <?php 
         $title = "Shiv Nath Rai Kohli Memorial Mid | Application Form";
         require_once('./view/header.php'); 
-    ?>
-    <?php
-        session_start();
-
-        if (isset($_SESSION["user_id"])){
-
-            $mysqli = require __DIR__ . "/db-connection.php";
-
-            $sql = "SELECT * FROM user WHERE id = {$_SESSION["user_id"]}";
-
-            $result = $mysqli->query($sql);
-
-            $user = $result->fetch_assoc();
-        }
-        // print_r($_SESSION)
-    ?>
-
-    <?php
-        if (!isset($user)) {
-            header("Location: login.php");
-        }
+        require_once('./includes/auth.php'); 
     ?>
 
           <!-- Wrapper 1 -->
@@ -695,7 +675,7 @@
                     <a href="index.html" class="prev-btn"><button type="button">Back</button></a>
 
                     <!-- Submit button -->
-                    <input type="submit" class="submit-btn mx-4" value="submit">
+                    <input type="submit" class="submit-btn mx-4" name="submit_application" value="submit">
     
                 </div>
             </form>

@@ -2,9 +2,9 @@
 if(isset($_POST["search"])) {
     $search_value = $_POST["search"];
 
-    $mysqli = require __DIR__ . "/db-connection.php";
+    $mysqli = require __DIR__ . "/config/db-connection.php";
 
-    $sql = "SELECT * FROM user WHERE name LIKE '%{$search_value}%'"; 
+    $sql = "SELECT * FROM users WHERE name LIKE '%{$search_value}%'"; 
     $result = $mysqli->query($sql);
 
     if ($result) { 

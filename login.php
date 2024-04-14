@@ -1,57 +1,11 @@
-<?php
-    $is_invaild = false;
 
-    if($_SERVER["REQUEST_METHOD"] === "POST"){
-        $mysqli = require __DIR__ . "/db-connection.php";
-
-        $sql = sprintf("SELECT * FROM user WHERE email= '%s'", 
-                            $mysqli->real_escape_string($_POST["nomineeEmail"]));
-
-        $result = $mysqli->query($sql);
-
-        $user = $result->fetch_assoc();
-
-        if($user){
-            if (password_verify($_POST["nomineePassword"], $user["password_hash"])){
-                session_start();
-
-                session_regenerate_id();
-
-                $_SESSION["user_id"]=$user["id"];
-
-                header("Location: admin-panel.php");
-                exit;
-            }
-        }
-        
-        $is_invaild = true;
-    }
-?>
-
-<?php
-    session_start();
-
-    if (isset($_SESSION["user_id"])){
-
-        $mysqli = require __DIR__ . "/db-connection.php";
-
-        $sql = "SELECT * FROM user WHERE id = {$_SESSION["user_id"]}";
-
-        $result = $mysqli->query($sql);
-
-        $user = $result->fetch_assoc();
-    }
-    // print_r($_SESSION)
-?>
   <?php
-        if (isset($user)) {
+        require('includes/auth.php');
+        
+        if (isset($_SESSION['user'])) {
             header("Location: admin-panel.php");
-        } else {
-            // header("Location: login.php");
         }
-    ?>
 
-    <?php 
         $title = "Login";
         require_once('./view/header.php'); 
     ?>
@@ -65,12 +19,7 @@
                     <button type="button" class="btn-close" data-bs-target="#signupModal" data-bs-toggle="modal" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <?php
-                    if ($is_invaild): ?>
-                    <em>Login invaild</em>
-                    
-                <?php endif; ?>
-                <form method="post" novalidate>
+                <form method="post" action="includes/form-handler.php" novalidate>
                     <div class="modal-body">
                         <div class="application-form">
                             <div class="mt-3">
@@ -89,7 +38,7 @@
                             <!-- Cancel button -->
                             <!-- <a href="javascript:void(0)" class="prev-btn"><button type="button" data-bs-dismiss="modal">Cancel</button></a> -->
                             <!-- Submit button -->
-                            <input type="submit" class="submit-btn mx-4" value="Login">
+                            <input type="submit" name="submit_login" class="submit-btn mx-4" value="Login">
                             <div class="text-center mt-2">
                                 <!-- <span>or</span> <br> -->
                                 <a href="signup.php">Don't have an Account? signup</a>
