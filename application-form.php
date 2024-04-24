@@ -39,18 +39,6 @@
 
                 <!-- 3. Age as on 31st Dec 2023 -->
                 <div class="row field-bl">
-                    <label class="form-label">3. Age as on 31st Dec 2023:</label><br>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-12">
-                        <input type="number" class="form-control" name="age">
-                        <!-- <select class="form-select" id="ageYears" name="age">
-                            <option value="" selected disabled>Year</option>
-                            <script>
-                                for (var i =  1974; i <= 2023; i++) {
-                                    document.write('<option value="' + i + '">' + i + '</option>');
-                                }
-                            </script>
-                        </select> -->
-                    </div>
                     <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-12">
                         <select class="form-select" id="ageMonths" name="ageMonths">
                             <option value="" selected disabled>Month</option>
@@ -72,11 +60,23 @@
                         </select>
                     </div>
                 </div> -->
-
+                
                 <!-- 4. Nationality: & 5. Gender -->
                 <div class="row field-bl">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                            <label class="form-label">3. Age as on 31st Dec 2023:</label><br>
+                            <input type="number" class="form-control" name="age">
+                            <!-- <select class="form-select" id="ageYears" name="age">
+                                <option value="" selected disabled>Year</option>
+                                <script>
+                                    for (var i =  1974; i <= 2023; i++) {
+                                        document.write('<option value="' + i + '">' + i + '</option>');
+                                    }
+                                </script>
+                            </select> -->
+                        </div>
                     <!-- Nationality -->
-                    <div class="col-lg-6 col-md-6 col-sm-6 field-bl">
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-12 field-bl">
                         <label for="nationality" class="form-label">4. Nationality:</label>
                         <select class="form-select" id="nationality" name="nationality">
                             <option value="" disabled selected>Select Nationality</option>
@@ -87,7 +87,7 @@
                         </select>   
                     </div>
                     <!-- Gender -->
-                    <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                         <label for="gender" class="form-label">5. Gender:</label>
                         <select class="form-select" id="gender" name="gender">
                             <option value="" disabled selected>Select Gender</option>

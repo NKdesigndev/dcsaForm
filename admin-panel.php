@@ -25,62 +25,68 @@
                     ?>
                 </div>
                 <div>
-                    <button class="tabBtn activeBtn"><i class="bi bi-files"></i>Registered Users </button>
-                    <button class="tabBtn"><i class="bi bi-printer"></i>print</button>
+                    <?php if($_SESSION['user']['role_id'] === 1): ?>
+                        <button class="tabBtn activeBtn"><i class="bi bi-files"></i>Registered Users </button>
+                    <?php endif ?>
+                    <?php if($_SESSION['user']['role_id'] === 2): ?>
+                        <a href="includes/form-handler.php?print=true"><button class="tabBtn"><i class="bi bi-printer"></i>print</button></a>
+                    <?php endif ?>
                     <a href="logout.php"><button class="tabBtn"><i class="bi bi-box-arrow-right"></i>logout</button></a>
             </div>
         </div>
         
         <!-- Main content Wrapper -->
-        <div class="admin-mainWrapper col-lg-9 col-md-12">
-            <!-- Search Box START -->
-            <div class="searchBox application-form">
-                <form method="post" action="searchResult.php" id="searchForm" class="row mb-3">
-                    <div class="col-lg-6 col-md-6 col-sm-6 d-flex">
-                        <h5 class="m-0 align-content-center">Registered Users</h5>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <input type="text" class="form-control" id="search" placeholder="Search..." name="search">
-                    </div>
-                </form>
-            </div>
-            <!-- Search Box END -->
-            <?php
-                $mysqli = require __DIR__ . "/config/db-connection.php";
-                $sql = "SELECT * FROM users"; 
-                $result = $mysqli->query($sql);
+        <?php if($_SESSION['user']['role_id'] === 1): ?>
+            <div class="admin-mainWrapper col-lg-9 col-md-12">
+                <!-- Search Box START -->
+                <div class="searchBox application-form">
+                    <form method="post" action="searchResult.php" id="searchForm" class="row mb-3">
+                        <div class="col-lg-6 col-md-6 col-sm-6 d-flex">
+                            <h5 class="m-0 align-content-center">Registered Users</h5>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <input type="text" class="form-control" id="search" placeholder="Search..." name="search">
+                        </div>
+                    </form>
+                </div>
+                <!-- Search Box END -->
+                <?php
+                    $mysqli = require __DIR__ . "/config/db-connection.php";
+                    $sql = "SELECT * FROM users"; 
+                    $result = $mysqli->query($sql);
 
-                if ($result) { 
-                    $users = $result->fetch_all(MYSQLI_ASSOC);
+                    if ($result) { 
+                        $users = $result->fetch_all(MYSQLI_ASSOC);
 
-                ?>
-            
-            <table class="table" id="searchedOutput">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>@Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                        $i = 1;
-                        foreach($users as $user) {
-                            echo '<tr> <td>' . $i++ . '</td>';
-                            echo '<td>' . $user["name"] . '</td>';
-                            echo '<td>' . $user["email"] . '</td>  </tr>';
+                    ?>
+                
+                <table class="table" id="searchedOutput">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>@Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            $i = 1;
+                            foreach($users as $user) {
+                                echo '<tr> <td>' . $i++ . '</td>';
+                                echo '<td>' . $user["name"] . '</td>';
+                                echo '<td>' . $user["email"] . '</td>  </tr>';
+                            }
+                        ?>
+                        <?php
+                        } else {
+                            echo "Error executing query: " . $mysqli->error;
                         }
-                    ?>
-                    <?php
-                    } else {
-                        echo "Error executing query: " . $mysqli->error;
-                    }
-                    
-                    ?>
-                </tbody>
-            </table>
-        </div>
+                        
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php endif ?>
     </div>
 </div>
 

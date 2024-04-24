@@ -1,6 +1,7 @@
 <?php
 
 require(__dir__ . '/../config/db-connection.php');
+require(__dir__ . '/../Wkhtmltopdf.php');
 
 
 function saveNomineeDetails($request) {
@@ -27,7 +28,7 @@ function saveNomineeDetails($request) {
             return addslashes($value);
         }, $payload);
         
-        $sql = "INSERT INTO nominees (name, dob, age, nationality, gender, official_address, residential_address, field_of_specialization, phd_thesis_title, joining_date, awards_details, contributions_to_science, contribution_social_imapact, technology_sectors, lectures_delivered, foreign_assignments, sci_journals_papers_number, citations_number, cumulative_impact_factor, patients, h_index, research_summary, publication_file_url, others, confirmation, consent, date, place, nominator_name, nominator_designation, nominator_address, nominator_email, annexure_file_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO nominees (user_id, name, dob, age, nationality, gender, official_address, residential_address, field_of_specialization, phd_thesis_title, joining_date, awards_details, contributions_to_science, contribution_social_imapact, technology_sectors, lectures_delivered, foreign_assignments, sci_journals_papers_number, citations_number, cumulative_impact_factor, patients, h_index, research_summary, publication_file_url, others, confirmation, consent, date, place, nominator_name, nominator_designation, nominator_address, nominator_email, annexure_file_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         // Prepare and bind parameters
         $stmt = $mysqli->prepare($sql);
@@ -36,7 +37,8 @@ function saveNomineeDetails($request) {
             $reponse['errors'][] = ("Error in preparing statement: " . $mysqli->error);
         }
 
-        $bindResult = $stmt->bind_param("sssssssssssssssssssssssssssssssss", 
+        $bindResult = $stmt->bind_param("ssssssssssssssssssssssssssssssssss", 
+            $_SESSION['user']['id'], 
             $request['name'], 
             $request['dob'], 
             $request['age'], 
@@ -254,6 +256,17 @@ function uploadFile($file, $path) {
 
 }
 
+function printCurrentApplication() {
+    try {
+        $wkhtmltopdf = new Wkhtmltopdf(array('path' => '../storage/pdf/'));
+        $wkhtmltopdf->setTitle("Title");
+        $wkhtmltopdf->setHtml("Content");
+        $wkhtmltopdf->output(Wkhtmltopdf::MODE_DOWNLOAD, "file.pdf");
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+}
+
 function login($request) {
 
     global $mysqli;
@@ -272,7 +285,7 @@ function login($request) {
     }
 
     if (empty($email_err) && empty($password_err)) {
-        $sql = "SELECT id, email, name, form_submited, password_hash FROM users WHERE email = ?";
+        $sql = "SELECT * FROM users WHERE email = ?";
 
         if ($stmt = $mysqli->prepare($sql)) {
             $stmt->bind_param("s", $param_email);
@@ -297,24 +310,97 @@ function login($request) {
                             header("location: ../application-form.php");
                         }
                     } else {
-                        $queryString = http_build_query(["error" => "Invalid email or password."]);
+                        $queryString = $_SESSION["error"] = "Invalid email or password.";
                     }
                 } else {
-                    $queryString = http_build_query(["error" => "Invalid email or password."]);
+                    $queryString = $_SESSION["error"] = "Invalid email or password.";
                 }
             } else {
-                $queryString = http_build_query(["error" => "Oops! Something went wrong. Please try again later."]);
+                $queryString = $_SESSION["error"] = "Oops! Something went wrong. Please try again later.";
             }
             $stmt->close();
         }
     }
     
     if(count($queryString))
-        header("location: ../login.php?$queryString");
+        header("location: ../login.php");
 
     $mysqli->close();
 }
 
+function signup($request) {
+    global $mysqli;
+
+    if($request["nomineePassword"] != $request["nomineePasswordConfirm"]) {
+        $_SESSION['error'] = 'Password confirmation does not match';
+        header('Location: ../signup.php');
+        return;
+    }
+
+    $password_hash = password_hash($request["nomineePassword"], PASSWORD_DEFAULT);
+
+    // PreparedStatements
+    $sql = "INSERT INTO users (name, email, password_hash) VALUES(?,?,?)";
+    $stmt = $mysqli->stmt_init();
+
+    if( ! $stmt->prepare($sql)){
+        die("SQL error:". $mysqli->error);
+    }
+
+    $stmt->bind_param("sss",
+                        $request["nomineeName"],
+                        $request["nomineeEmail"],
+                        $password_hash);
+
+    if($stmt->execute()){
+        
+        header("Location: ../signup-success.php");
+        exit;
+    }
+    else{
+        if($mysqli->errno === 1062){
+            $_SESSION['error'] = 'Email already taken';
+            header('Location: ../signup.php');
+        }
+        else{
+            $_SESSION['error'] = $mysqli->error . " " . $mysqli->errno;
+            header('Location: ../signup.php');
+        }
+    }
+}
+
+function getAuthUser($id = null) {
+    global $mysqli;
+
+    if(is_null($id) && !isset($_SESSION['user']['id']) && isRequestGuest()) {
+        header('Location: login.php');
+        return;
+    }
+    
+    $userId = $id ?? isset($_SESSION['user']['id'])? $_SESSION['user']['id']: null;
+
+    $sql = "SELECT * FROM users WHERE id = ?";
+
+    $stmt = $mysqli->prepare($sql);
+
+    $bindResult = $stmt->bind_param("s", 
+        $userId,
+    );
+    
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+
+    return $user;
+}
+
+function isCurrentPage($fileName) {
+    return strpos($_SERVER['REQUEST_URI'], $fileName) !== false;
+}
+
+function isRequestGuest() {
+    return !isCurrentPage("login.php") && !isCurrentPage("signup.php") && !isCurrentPage("signup-success.php");
+}
 
 function dd($data) {
     echo "<pre>";

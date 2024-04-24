@@ -1,9 +1,9 @@
 <?php
 
 $host = "localhost";
-$dbname = "dcsa";
+$dbname = "dcsa_form";
 $username = "root";
-$password = "Anviam@123";
+$password = "";
 
 $mysqli = new mysqli($host, $username, $password, $dbname);
 

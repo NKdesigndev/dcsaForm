@@ -32,11 +32,11 @@ CREATE TABLE `academic_qualification` (
   `course_id` int NOT NULL,
   `university_id` int NOT NULL,
   `passing_year` varchar(255) NOT NULL,
-  `division_cgp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `division_cgp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `additional_particulars` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
   `nominee_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `academic_qualification`
@@ -72,7 +72,7 @@ INSERT INTO `academic_qualification` (`id`, `course_id`, `university_id`, `passi
 CREATE TABLE `courses` (
   `id` int NOT NULL,
   `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -82,41 +82,41 @@ CREATE TABLE `courses` (
 
 CREATE TABLE `nominees` (
   `id` int NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `dob` date DEFAULT NULL,
   `age` int DEFAULT NULL,
-  `nationality` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `gender` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `official_address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `residential_address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `field_of_specialization` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `phd_thesis_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `nationality` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gender` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `official_address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `residential_address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `field_of_specialization` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phd_thesis_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `joining_date` date DEFAULT NULL,
-  `awards_details` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `contributions_to_science` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `contribution_social_imapact` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `technology_sectors` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `lectures_delivered` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `foreign_assignments` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `research_summary` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `awards_details` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `contributions_to_science` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `contribution_social_imapact` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `technology_sectors` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lectures_delivered` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `foreign_assignments` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `research_summary` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `sci_journals_papers_number` int DEFAULT NULL,
   `citations_number` int DEFAULT NULL,
-  `cumulative_impact_factor` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `cumulative_impact_factor` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `h_index` int DEFAULT NULL,
-  `patients` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `patiens` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `publication_file_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `others` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `confirmation` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `consent` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `patients` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `patiens` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `publication_file_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `others` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `confirmation` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `consent` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date` date DEFAULT NULL,
-  `place` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `nominator_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `nominator_designation` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `place` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nominator_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nominator_designation` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nominator_address` text NOT NULL,
   `nominator_email` varchar(255) NOT NULL,
   `annexure_file_url` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `nominees`
@@ -150,7 +150,7 @@ CREATE TABLE `research_supervision_details` (
   `year` varchar(255) NOT NULL,
   `current_status` varchar(255) NOT NULL,
   `nominee_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `research_supervision_details`
@@ -185,7 +185,7 @@ CREATE TABLE `scientist_details` (
   `email` varchar(255) NOT NULL,
   `research_supervision_detail_id` int NOT NULL,
   `nominee_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `scientist_details`
@@ -241,7 +241,7 @@ INSERT INTO `scientist_details` (`id`, `name`, `address`, `specialization`, `ema
 CREATE TABLE `universities` (
   `id` int NOT NULL,
   `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -255,7 +255,7 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `password_hash` varchar(255) DEFAULT NULL,
   `form_submited` bigint NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`

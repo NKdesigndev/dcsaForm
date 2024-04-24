@@ -1,4 +1,11 @@
 <?php 
+
+        require('includes/auth.php');
+                
+        if (isset($_SESSION['user'])) {
+            header("Location: admin-panel.php");
+        }
+
     $title = "Signup Successfull";
     require_once('./view/header.php'); 
 ?>

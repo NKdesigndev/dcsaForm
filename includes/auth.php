@@ -1,16 +1,17 @@
 <?php
 
-// require(__dir__ . '/../config/functions.php');
+require('functions.php');
 session_start();
 
-if((!isset($_SESSION['user']) || empty($_SESSION['user'])) && $_SERVER['REQUEST_URI'] != '/login.php') {
-    header('Location: login.php');
+$_SESSION['user'] = getAuthUser();
+
+if(isset($_SESSION['user'])) {
+
+    if(($_SESSION['user']['role_id'] == 1 || $_SESSION['user']['form_submited']) && !isCurrentPage("admin-panel.php")) {
+        header('Location: admin-panel.php');
+        return;
+    }
+    if($_SESSION['user']['role_id'] == 2 && !$_SESSION['user']['form_submited'] && !isCurrentPage("application-form.php")) {
+        header('Location: application-form.php');
+    }
 }
-
-// else if(!$_SESSION['user']['form_submited'] && $_SERVER['REQUEST_URI'] != '/application-from.php') {
-//     header('Location: application-from.php');
-// }
-
-// else if($_SESSION['user']['form_submited'] && $_SERVER['REQUEST_URI'] == '/application-from.php') {
-//     header('Location: admin-panel.php');
-// }

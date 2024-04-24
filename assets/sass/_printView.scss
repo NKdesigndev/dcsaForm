@@ -1,0 +1,40 @@
+// Print view START
+.printView-con{
+    padding: 30px 20px;
+
+    .hdr-1{
+        font-size: clamp(1.1rem, 4vw, 1.6rem);
+    }
+    
+    .pr-hdr-1{
+        font-size: 18px;
+        font-family: $Verdana-md;   
+        color: $text-accent;
+        margin-bottom: 5px;
+        line-height: 28px;
+        font-family: $CaslonFont;
+        font-size: 16px;
+        
+    }
+    .pr-text-wrapper{
+        margin: 50px 0;
+    }
+    .pr-txt{
+        line-height: 25px;
+        font-size: 1rem;
+        font-family: $Verdana-md;
+        color: $text-accent;
+        // padding-left: 16px;
+        margin-bottom: 10px;
+    }
+    .txt-con{
+        margin-bottom: 20px;
+    }
+    .pr-infoTxt{
+        font-family: $Verdana-md;
+        font-size: 14px;
+        // color: red;
+        margin-bottom: 6px !important;
+    }
+}
+// Print view VIEW

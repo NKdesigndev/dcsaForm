@@ -1,20 +1,34 @@
     <?php 
+
+        require('includes/auth.php');
+                
+        if (isset($_SESSION['user'])) {
+            header("Location: admin-panel.php");
+        }
+    
         $title = "SignUp";
         require_once('./view/header.php'); 
     ?>
 
     <!-- signup Modal -->
-    <div class="modal fade signupModal" id="signupModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade signupModal" id="signupModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
+                
+                <?php if(isset($_SESSION['error']) && !empty(isset($_SESSION['error']))): ?>
+                    <div class="alert alert-danger m-4">
+                        <?= $_SESSION['error']; ?>
+                    </div>
+                <?php endif ?>
+
                 <div class="modal-header">
                     <div>
                         <h5 class="modal-title" id="staticBackdropLabel">Create your account</h5>
                         <p>To save your work</p>
                     </div>
-                    <a href="index.php"><button type="button" class="btn-close me-2" data-bs-target="#signupModal" data-bs-toggle="modal" data-bs-dismiss="modal" aria-label="Close"></button></a>
+                    <a href="index.php"><button type="button" class="btn-close me-2" data-bs-toggle="modal" data-bs-dismiss="modal" aria-label="Close"></button></a>
                 </div>
-                <form action="process-signup.php" method="post" >
+                <form action="includes/form-handler.php" method="post" >
                     <div class="modal-body">
                         <div class="application-form">
                             <div class="mt-3">
@@ -38,7 +52,7 @@
                     <div class="modal-footer mt-3 justify-content-end flex-column">
                         <!-- <div class="col-lg-12 d-flex justify-content"> -->
                             <!-- Submit button -->
-                            <input type="submit" class="submit-btn mx-4" value="signup">
+                            <input type="submit" class="submit-btn mx-4" name="submit_signup" value="signup">
                             <div class="text-center align-content-center ">
                                 <span>or</span> <br>
                                 <a href="login.php" >Already have an Account?</a>
