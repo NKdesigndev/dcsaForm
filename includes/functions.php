@@ -113,6 +113,52 @@ function saveNomineeDetails($request) {
     }
 }
 
+// Save Employement details
+function saveEmployementDetails($request, $nominee_id) {
+    try {
+
+        global $mysqli;
+
+        $data = $request['employement_details'];
+
+        // $saveEmployementDetailsId = saveEmployementDetailsId($request, $nominee_id);
+        
+        foreach ($request['employement_details'] as $employee) {
+            // Prepare SQL statement
+            $sql = ("INSERT INTO employement_details (period_form, period_to, place_of_employment, designation, scale_of_pay) VALUES (?, ?, ?, ?, ?)");
+            
+            $stmt = $mysqli->prepare($sql);
+            
+            // Bind parameters
+            $bindResult = $stmt->bind_param("ssssss", 
+                $data['period_form'],
+                $data['period_to'],
+                $data['place_of_employment'],
+                $data['designation'],
+                $data['scale_of_pay'],
+                $nominee_id,
+            );
+                
+            if ($bindResult === false) {
+                return ("Error in binding parameters: " . $stmt->error);
+            }
+            
+            // Execute the statement
+            if (!$stmt->execute()) {
+                return ("Error in executing statement: " . $stmt->error);
+            }
+        
+            // Close the statement
+            $stmt->close();
+        }
+
+        return $mysqli->insert_id;
+    
+    } catch(Exception $e) {
+        echo "Error: " . $e->getMessage();
+    }
+    
+}
 function saveScientistsData($request, $nominee_id) {
     try {
         global $mysqli;
@@ -271,14 +317,20 @@ function getNomineeData() {
         $userId = $_SESSION['user']['id'];
 
         $nomineeQuery = "SELECT * FROM nominees WHERE user_id = ?";
-        $academicQualificationQuery = "SELECT * FROM academic_qualification WHERE nominee_id = ?";
+        // $academicQualificationQuery = "SELECT * FROM academic_qualification WHERE nominee_id = ?";
+        $academicQualificationQuery = "SELECT * FROM academic_qualification
+        INNER JOIN universities ON universities.id = academic_qualification.university_id
+        INNER JOIN courses ON courses.id = academic_qualification.course_id
+        WHERE nominee_id = ?;";
         $researchSupervisionDetailsQuery = "SELECT * FROM research_supervision_details WHERE nominee_id = ?";
         $scientistDetailsQuery = "SELECT * FROM scientist_details WHERE nominee_id = ?";
+        $employmentDetailsQuery = "SELECT * FROM employment_details WHERE nominee_id = ?";
         
         $data = getData($nomineeQuery, [$userId]);
         $data['academic_qualification'] = getData($academicQualificationQuery, [$data['id']]);
         $data['research_supervision_details'] = getData($researchSupervisionDetailsQuery, [$data['id']]);
         $data['scientist_details'] = getData($scientistDetailsQuery, [4]);
+        $data['employment_details'] = getData($employmentDetailsQuery, [4]);
         return $data;
         
     } catch (Exception $e) {

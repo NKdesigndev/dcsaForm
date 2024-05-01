@@ -33,6 +33,12 @@
     }
     .txt-con{
         margin-bottom: 20px;
+        
+        .pr-txt{
+            &::first-letter{
+                text-transform: capitalize !important;
+            }
+        }
     }
     .pr-infoTxt{
         font-family: $Verdana-md;

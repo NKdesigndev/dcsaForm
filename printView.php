@@ -83,11 +83,11 @@
                             function academicQualification($course) { ?>
                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                     <li class="pr-hdr-1">Name of the course:</li>
-                                    <p class="pr-txt mb-3 ps-0">Error <?php echo $course['course_id']; ?></p>
+                                    <p class="pr-txt mb-3 ps-0"><?php echo $course['course_name']; ?></p>
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                     <li class="pr-hdr-1">Name of the University:</li>
-                                    <p class="pr-txt mb-3 ps-0">Error <?php echo $course['university_id']; ?></p>
+                                    <p class="pr-txt mb-3 ps-0"><?php echo $course['name']; ?></p>
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                     <li class="pr-hdr-1">Year of Passing:</li>
@@ -163,146 +163,41 @@
             <!-- 11 -->
             <div class="col-sm-12">
                 <ol type="1" class="px-2">
-                    <li value="11" class="pr-hdr-1">[Error] Employment details:</li>
+                    <li value="11" class="pr-hdr-1">Employment details:</li>
                 </ol>
                 
                 <table class="table table-bordered">
                     <tbody>
+                    <?php $num = 1; foreach($data['employment_details'] as $employee) { ?>
                         <tr>
-                            <th scope="row" style="padding: 10px 12px;">1</th>
+                            <th scope="row" style="padding: 10px 12px;"><?= $num++ ?></th>
                             <td class="col-sm-12">
                                 <div>
                                     <h4 class="pr-hdr-1 mt-1">Place of Employment</h4>
-                                    <p class="pr-txt ps-0">PGIMER, Chandigarh</p>
+                                    <p class="pr-txt ps-0"><?= $employee['place_of_employment']?></p>
                                 </div>
                                 <ul class="row d-flex justify-content-between pe-4 ps-4">
                                     <div class="col-sm-auto mt-2">
                                         <li class="pr-hdr-1 col-sm-auto m-0">Period from - to	</li>
                                         <div class="d-flex">
-                                            <p class="pr-txt me-2 ps-0 mb-1">02/14/2023</p>
+                                            <p class="pr-txt me-2 ps-0 mb-1"><?= $employee['period_form']?></p>
                                             <span>-</span>
-                                            <p class="pr-txt ms-2 ps-0 mb-1">02/14/2024</p>
+                                            <p class="pr-txt ms-2 ps-0 mb-1"><?= $employee['period_to']?></p>
                                         </div>
                                     </div>
                                     <div class="col-sm-auto mt-2">
                                         <li class="pr-hdr-1 col-sm-auto m-0">Designation</li>
-                                        <p class="pr-txt ps-0 mb-1">Scientist  Scientist</p>
+                                        <p class="pr-txt ps-0 mb-1"><?= $employee['designation']?></p>
                                     </div>
                                     <div class="col-sm-auto mt-2">
                                         <li class="pr-hdr-1 m-0">Scale of Pay</li>
-                                        <p class="pr-txt ps-0 mb-1">15600+6000 </p>
+                                        <p class="pr-txt ps-0 mb-1"><?= $employee['scale_of_pay']?></p>
                                     </div>
                                 </ul>
                             </td>
                         </tr>
-                        <tr>
-                            <th scope="row" style="padding: 10px 12px;">2</th>
-                            <td class="col-sm-12">
-                                <div>
-                                    <h4 class="pr-hdr-1 mt-1">Place of Employment</h4>
-                                    <p class="pr-txt ps-0">PGIMER, Chandigarh</p>
-                                </div>
-                                <ul class="row d-flex justify-content-between pe-4 ps-4">
-                                    <div class="col-sm-auto mt-2">
-                                        <li class="pr-hdr-1 col-sm-auto m-0">Period from - to	</li>
-                                        <div class="d-flex">
-                                            <p class="pr-txt me-2 ps-0 mb-1">02/14/2023</p>
-                                            <span>-</span>
-                                            <p class="pr-txt ms-2 ps-0 mb-1">02/14/2024</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-auto mt-2">
-                                        <li class="pr-hdr-1 col-sm-auto m-0">Designation</li>
-                                        <p class="pr-txt ps-0 mb-1">Scientist  Scientist</p>
-                                    </div>
-                                    <div class="col-sm-auto mt-2">
-                                        <li class="pr-hdr-1 m-0">Scale of Pay</li>
-                                        <p class="pr-txt ps-0 mb-1">15600+6000 </p>
-                                    </div>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row" style="padding: 10px 12px;">3</th>
-                            <td class="col-sm-12">
-                                <div>
-                                    <h4 class="pr-hdr-1 mt-1">Place of Employment</h4>
-                                    <p class="pr-txt ps-0">PGIMER, Chandigarh</p>
-                                </div>
-                                <ul class="row d-flex justify-content-between pe-4 ps-4">
-                                    <div class="col-sm-auto mt-2">
-                                        <li class="pr-hdr-1 col-sm-auto m-0">Period from - to	</li>
-                                        <div class="d-flex">
-                                            <p class="pr-txt me-2 ps-0 mb-1">02/14/2023</p>
-                                            <span>-</span>
-                                            <p class="pr-txt ms-2 ps-0 mb-1">02/14/2024</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-auto mt-2">
-                                        <li class="pr-hdr-1 col-sm-auto m-0">Designation</li>
-                                        <p class="pr-txt ps-0 mb-1">Scientist  Scientist</p>
-                                    </div>
-                                    <div class="col-sm-auto mt-2">
-                                        <li class="pr-hdr-1 m-0">Scale of Pay</li>
-                                        <p class="pr-txt ps-0 mb-1">15600+6000 </p>
-                                    </div>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row" style="padding: 10px 12px;">4</th>
-                            <td class="col-sm-12">
-                                <div>
-                                    <h4 class="pr-hdr-1 mt-1">Place of Employment</h4>
-                                    <p class="pr-txt ps-0">PGIMER, Chandigarh</p>
-                                </div>
-                                <ul class="row d-flex justify-content-between pe-4 ps-4">
-                                    <div class="col-sm-auto mt-2">
-                                        <li class="pr-hdr-1 col-sm-auto m-0">Period from - to	</li>
-                                        <div class="d-flex">
-                                            <p class="pr-txt me-2 ps-0 mb-1">02/14/2023</p>
-                                            <span>-</span>
-                                            <p class="pr-txt ms-2 ps-0 mb-1">02/14/2024</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-auto mt-2">
-                                        <li class="pr-hdr-1 col-sm-auto m-0">Designation</li>
-                                        <p class="pr-txt ps-0 mb-1">Scientist  Scientist</p>
-                                    </div>
-                                    <div class="col-sm-auto mt-2">
-                                        <li class="pr-hdr-1 m-0">Scale of Pay</li>
-                                        <p class="pr-txt ps-0 mb-1">15600+6000 </p>
-                                    </div>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row" style="padding: 10px 12px;">5</th>
-                            <td class="col-sm-12">
-                                <div>
-                                    <h4 class="pr-hdr-1 mt-1">Place of Employment</h4>
-                                    <p class="pr-txt ps-0">PGIMER, Chandigarh</p>
-                                </div>
-                                <ul class="row d-flex justify-content-between pe-4 ps-4">
-                                    <div class="col-sm-auto mt-2">
-                                        <li class="pr-hdr-1 col-sm-auto m-0">Period from - to	</li>
-                                        <div class="d-flex">
-                                            <p class="pr-txt me-2 ps-0 mb-1">02/14/2023</p>
-                                            <span>-</span>
-                                            <p class="pr-txt ms-2 ps-0 mb-1">02/14/2024</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-auto mt-2">
-                                        <li class="pr-hdr-1 col-sm-auto m-0">Designation</li>
-                                        <p class="pr-txt ps-0 mb-1">Scientist  Scientist</p>
-                                    </div>
-                                    <div class="col-sm-auto mt-2">
-                                        <li class="pr-hdr-1 m-0">Scale of Pay</li>
-                                        <p class="pr-txt ps-0 mb-1">15600+6000 </p>
-                                    </div>
-                                </ul>
-                            </td>
-                        </tr>
+                        
+                        <?php } ?>
                     </tbody>
                 </table>     
             </div>
@@ -431,10 +326,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($data['scientist_details'] as $scientist) { ?>
+                        <?php $num =1; foreach($data['scientist_details'] as $scientist) { ?>
                         <tr>
 
-                        <th scope="row" style="padding: 10px 12px;">1</th>
+                        <th scope="row" style="padding: 10px 12px;"><?= $num++ ?></th>
                             <td class="col-sm-12">
                                 <div class="row">
                                     <div class="col-sm-6 col-md-6 col-lg-6">

@@ -159,11 +159,11 @@
                                         <label for="course" class="form-label">Name of the course:</label>
                                         <select class="form-select" id="course" name="academic_qualification[bachelor][course_id]">
                                             <option value="" disabled selected>Select Course</option>
-                                            <option value="1">B.Sc.</option>
-                                            <option value="2">M.Sc.</option>
+                                            <option value="1">BCA</option>
+                                            <option value="2">B.Sc</option>
                                         </select>
                                     </div>
-                        
+                                    
                                     <div class="col-lg-6 col-md-6">
                                         <label for="university" class="form-label">Name of the University:</label>
                                         <select class="form-select" id="university" name="academic_qualification[bachelor][university_id]">
@@ -183,7 +183,7 @@
                                             <option value="2021">2021</option>
                                         </select>
                                     </div>
-                        
+                                    
                                     <div class="col-lg-6 col-md-6 ">
                                         <label for="division" class="form-label">Division/Class/CGP:</label>
                                         <select class="form-select" id="division" name="academic_qualification[bachelor][division_cgp]">
@@ -193,37 +193,37 @@
                                         </select>
                                     </div>
                                 </div>
-
+                                
                                 <div class="col-lg-12 field-bl">
                                     <label for="additionalParticulars" class="form-label">Additional Particulars:</label>
                                     <textarea class="form-control" id="additionalParticulars" name="academic_qualification[bachelor][additional_particulars]" rows="3"></textarea>
                                 </div>
 
                             </div>
-                          </div>
                         </div>
-
-                        <!-- (B) Master’s degree -->
-                        <div class="accordion-item">
-                          <h2 class="accordion-header" id="headingTwo">
+                    </div>
+                    
+                    <!-- (B) Master’s degree -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                 (B) Master’s degree
                             </button>
-                          </h2>
+                        </h2>
                           <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-
-                                <input type="hidden" name="academic_qualification[master][type]" value="master">
-
-                                <div class="row field-bl">
-                                    <div class="col-lg-6">
-                                        <label for="course" class="form-label">Name of the course:</label>
-                                        <select class="form-select" id="course" name="academic_qualification[master][course_id]">
-                                            <option value="" disabled selected>Select Course</option>
-                                            <option value="1">B.Sc.</option>
-                                            <option value="2">M.Sc.</option>
-                                        </select>
-                                    </div>
+                              <div class="accordion-body">
+                                  
+                                  <input type="hidden" name="academic_qualification[master][type]" value="master">
+                                  
+                                  <div class="row field-bl">
+                                      <div class="col-lg-6">
+                                          <label for="course" class="form-label">Name of the course:</label>
+                                          <select class="form-select" id="course" name="academic_qualification[master][course_id]">
+                                              <option value="" disabled selected>Select Course</option>
+                                              <option value="1">MCA</option>
+                                              <option value="2">M.Sc</option>
+                                            </select>
+                                        </div>
                         
                                     <div class="col-lg-6">
                                         <label for="university" class="form-label">Name of the University:</label>
@@ -244,7 +244,7 @@
                                             <option value="2021">2021</option>
                                         </select>
                                     </div>
-                        
+                                    
                                     <div class="col-lg-6">
                                         <label for="division" class="form-label">Division/Class/CGP:</label>
                                         <select class="form-select" id="division" name="academic_qualification[master][division_cgp]">
@@ -254,7 +254,7 @@
                                         </select>
                                     </div>
                                 </div>
-
+                                
                                 <div class="col-lg-12 field-bl">
                                     <label for="additionalParticulars" class="form-label">Additional Particulars:</label>
                                     <textarea class="form-control" id="additionalParticulars" name="academic_qualification[master][additional_particulars]" rows="3"></textarea>
@@ -266,26 +266,27 @@
 
                         <!-- (C) M.Phil. / equivalent -->
                         <div class="accordion-item">
-                          <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                (C) M.Phil. / equivalent
-                            </button>
-                          </h2>
-
-                          <input type="hidden" name="academic_qualification[mphil][type]" value="mphil">
-                          
-                          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <div class="row field-bl">
-                                    <div class="col-lg-6">
-                                        <label for="course" class="form-label">Name of the course:</label>
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    (C) M.Phil. / equivalent
+                                </button>
+                            </h2>
+                            
+                            <input type="hidden" name="academic_qualification[mphil][type]" value="mphil">
+                            
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <div class="row field-bl">
+                                        <div class="col-lg-6">
+                                            <label for="course" class="form-label">Name of the course:</label>
                                         <select class="form-select" id="course" name="academic_qualification[mphil][course_id]">
                                             <option value="" disabled selected>Select Course</option>
-                                            <option value="1">B.Sc.</option>
-                                            <option value="2">M.Sc.</option>
+                                            <option value="1">B.Sc</option>
+                                            <option value="2">M.Sc</option>
+                                            <option value="3">M.Phil</option>
                                         </select>
                                     </div>
-                        
+                                    
                                     <div class="col-lg-6">
                                         <label for="university" class="form-label">Name of the University:</label>
                                         <select class="form-select" id="university" name="academic_qualification[mphil][university_id]">
@@ -295,7 +296,7 @@
                                         </select>
                                     </div>
                                 </div>
-                    
+                                
                                 <div class="row field-bl">
                                     <div class="col-lg-6">
                                         <label for="year" class="form-label">Year of Passing:</label>
