@@ -8,7 +8,18 @@
     <div class="container wrapper-1">
         <h3 class="hdr-1">Application Form for <span class="highlight-red">Shiv Nath Rai Kohli</span> Memorial Mid-Career <br>Best Scientist Award - 2023</h3>
         
-        
+        <div class="userBlock">
+            <p>
+                <?php
+                    if (isset($_SESSION['user'])) {
+                        echo '<p class="userName" style="text-transform: capitalize;">Welcome! <span style="color: #1E81C6;">' . htmlspecialchars($_SESSION['user']["name"]) . '</span></p>';
+                    } else {
+                        // header("Location: login.php");
+                    }
+                ?>
+            </p>
+            <a href="logout.php" class="logout-btn"><button><i class="bi bi-box-arrow-right"></i>Logout</button></a>
+        </div>
         <!-- Information block -->
         <div class="msg-con">
             <div class="form-hdr">
@@ -672,7 +683,7 @@
 
                 <div class="col-lg-12 d-flex justify-content-center">
                     <!-- Back button -->
-                    <a href="index.html" class="prev-btn"><button type="button">Back</button></a>
+                    <a href="index.php" class="prev-btn"><button type="button">Back</button></a>
 
                     <!-- Submit button -->
                     <input type="submit" class="submit-btn mx-4" name="submit_application" value="submit">

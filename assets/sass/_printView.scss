@@ -18,6 +18,7 @@
     }
     .pr-text-wrapper{
         margin: 50px 0;
+        
     }
     .pr-txt{
         line-height: 25px;
@@ -26,6 +27,9 @@
         color: $text-accent;
         // padding-left: 16px;
         margin-bottom: 10px;
+        &::first-letter{
+            text-transform: capitalize;
+        }
     }
     .txt-con{
         margin-bottom: 20px;

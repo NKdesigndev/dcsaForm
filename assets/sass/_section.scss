@@ -35,7 +35,7 @@
 .msg-con{
     border: 1px solid $border-clr;
     background-color: $bg-shade-2;
-    margin-top: 40px;
+    margin-top: 10px;
     
     box-shadow: 0px 4px 4px -1px rgba($color: #000000, $alpha: 0.2);
     p{
@@ -131,7 +131,7 @@
     padding: 40px 100px !important;  
     
 }
-.next-btn, .prev-btn, .submit-btn{
+.next-btn, .prev-btn, .submit-btn, .logout-btn{
     outline: none;
     text-align: center;
     // margin-bottom: 40px;
@@ -152,6 +152,41 @@
             background: $secondary-clr;
         }
     }    
+}
+.userBlock{
+    display: flex;
+    margin-top: 20px;
+    p{
+        font-family: $Verdana-md;
+        color: $text-accent;
+        font-size: 1rem;
+        
+        &::first-letter{
+            text-transform: capitalize;
+        }
+    }
+    .logout-btn{
+        // float: right;
+        margin-left: 20px;
+        // margin-top: 20px;
+        button{
+            background: none;
+            padding: 0;
+            color: $text-accent;
+            transform: translateX(0px);
+    
+            &:hover{
+                background: none;
+                color: $primary-clr;
+                box-shadow: 0 0 0 ;
+                transform: translateX(2px);
+            }
+            i{
+                color: $primary-clr;
+                margin-right: 6px;
+            }
+        }
+    }
 }
 .prev-btn{
     button{

@@ -257,11 +257,30 @@ function uploadFile($file, $path) {
 }
 
 function printCurrentApplication() {
+    dd(getNomineeData());
+}
+
+function getNomineeData() {
     try {
-        $wkhtmltopdf = new Wkhtmltopdf(array('path' => '../storage/pdf/'));
-        $wkhtmltopdf->setTitle("Title");
-        $wkhtmltopdf->setHtml("Content");
-        $wkhtmltopdf->output(Wkhtmltopdf::MODE_DOWNLOAD, "file.pdf");
+        // $wkhtmltopdf = new Wkhtmltopdf(array('path' => '../storage/pdf/'));
+        // $wkhtmltopdf->setTitle("Title");
+        // $wkhtmltopdf->setHtml("Content");
+        // $wkhtmltopdf->output(Wkhtmltopdf::MODE_DOWNLOAD, "file.pdf");
+
+        // global $mysqli;
+        $userId = $_SESSION['user']['id'];
+
+        $nomineeQuery = "SELECT * FROM nominees WHERE user_id = ?";
+        $academicQualificationQuery = "SELECT * FROM academic_qualification WHERE nominee_id = ?";
+        $researchSupervisionDetailsQuery = "SELECT * FROM research_supervision_details WHERE nominee_id = ?";
+        $scientistDetailsQuery = "SELECT * FROM scientist_details WHERE nominee_id = ?";
+        
+        $data = getData($nomineeQuery, [$userId]);
+        $data['academic_qualification'] = getData($academicQualificationQuery, [$data['id']]);
+        $data['research_supervision_details'] = getData($researchSupervisionDetailsQuery, [$data['id']]);
+        $data['scientist_details'] = getData($scientistDetailsQuery, [4]);
+        return $data;
+        
     } catch (Exception $e) {
         echo $e->getMessage();
     }
@@ -400,6 +419,23 @@ function isCurrentPage($fileName) {
 
 function isRequestGuest() {
     return !isCurrentPage("login.php") && !isCurrentPage("signup.php") && !isCurrentPage("signup-success.php");
+}
+
+function getData($query, $params) {
+    global $mysqli;
+    $stmt = $mysqli->prepare($query);
+
+    $strings = '';
+    foreach ($params as $key => $value) {
+        $stmt->bind_param('s', $value);
+    }
+    
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    $data = $result->fetch_all(MYSQLI_ASSOC);
+    
+    return count($data) === 1? $data[0]: $data;
 }
 
 function dd($data) {
