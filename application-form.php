@@ -32,7 +32,7 @@
         
         <!-- Form START -->
         <div class="container mt-5 application-form">
-            <form action="functions.php" method="POST" enctype="multipart/form-data">
+            <form action="includes/form-handler.php" method="POST" enctype="multipart/form-data" id="application-form">
                 <!-- 1. Name in full & Designation of the nominee* & 2. DOB -->
                 <div class="row field-bl">
                     <!-- Nominee Name -->
@@ -161,6 +161,7 @@
                                             <option value="" disabled selected>Select Course</option>
                                             <option value="1">BCA</option>
                                             <option value="2">B.Sc</option>
+                                            <option value="3">BA</option>
                                         </select>
                                     </div>
                                     
@@ -687,13 +688,74 @@
                     <a href="index.php" class="prev-btn"><button type="button">Back</button></a>
 
                     <!-- Submit button -->
-                    <input type="submit" class="submit-btn mx-4" name="submit_application" value="submit">
-    
+                    <!-- <input type="submit" class="" value="submit"> -->
+                    <input type="submit" class="submit-btn mx-4" data-bs-toggle="modal" data-bs-target="#ConfirmModal" name="submit_application" value="Submit">
+                    
+                    <!-- Modal -->
+                    <div class="modal fade" id="ConfirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                          <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Attention!</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    You will not be able to make alterations after submission.
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#" data-bs-dismiss="modal" class="prev-btn"><button type="button">Close</button></a>
+                                    <button type="type" class="submit-btn mx-4">Confirm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
         <!-- Form END -->
           
     </div>
+
+    <script>
+          // Function to check if the form is filled
+    function isFormFilled() {
+        var inputField = document.getElementById("inputField").value;
+        return inputField !== "";
+    }
+
+    // Show modal only if form is filled
+    document.getElementById("application-form").addEventListener("submit", function (event) {
+        if (isFormFilled()) {
+            $('#ConfirmModal').modal('show');
+        } else {
+            // Prevent form submission if not filled
+            event.preventDefault();
+            alert("Please fill out the form before submitting.");
+        }
+    });
+
+    // Handle confirm button click
+    document.getElementById("confirmButton").addEventListener("click", function () {
+        // Submit form if confirmed
+        document.getElementById("application-form").submit();
+    });
+//         document.getElementById("myForm").addEventListener("submit", function(event) {
+//     // Check if the form is valid
+//     if (!this.checkValidity()) {
+//         // Prevent form submission if the form is not valid
+//         event.preventDefault();
+//         // Display an error message
+//         alert("Please fill out all required fields.");
+//         // Highlight the invalid fields
+//         this.querySelectorAll(':invalid').forEach((elem) => elem.classList.add('is-invalid'));
+//         // Scroll to the first invalid field
+//         this.querySelector(':invalid').scrollIntoView({ behavior: 'smooth' });
+//         return;
+//     }
+//     // If the form is valid, show the modal
+//     $('#ConfirmModal').modal('show');
+// });
+
+    </script>
 
     <?php require('./view/footer.php'); ?>

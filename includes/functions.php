@@ -3,6 +3,7 @@
 require(__dir__ . '/../config/db-connection.php');
 require(__dir__ . '/../Wkhtmltopdf.php');
 
+$request = $_POST;
 
 function saveNomineeDetails($request) {
     
@@ -28,13 +29,13 @@ function saveNomineeDetails($request) {
             return addslashes($value);
         }, $payload);
         
-        $sql = "INSERT INTO nominees (user_id, name, dob, age, nationality, gender, official_address, residential_address, field_of_specialization, phd_thesis_title, joining_date, awards_details, contributions_to_science, contribution_social_imapact, technology_sectors, lectures_delivered, foreign_assignments, sci_journals_papers_number, citations_number, cumulative_impact_factor, patients, h_index, research_summary, publication_file_url, others, confirmation, consent, date, place, nominator_name, nominator_designation, nominator_address, nominator_email, annexure_file_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO nominees (user_id, name, dob, age, nationality, gender, official_address, residential_address, field_of_specialization, phd_thesis_title, joining_date, awards_details, contributions_to_science, contribution_social_imapact, technology_sectors, lectures_delivered, foreign_assignments, sci_journals_papers_number, citations_number, cumulative_impact_factor, patients, h_index, research_summary, publication_file_url, others, confirmation, consent, date, place, nominator_name, nominator_designation, nominator_address, nominator_email, annexure_file_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         // Prepare and bind parameters
         $stmt = $mysqli->prepare($sql);
 
         if ($stmt === false) {
-            $reponse['errors'][] = ("Error in preparing statement: " . $mysqli->error);
+            throw new Exception("Error in preparing statement: " . $mysqli->error);
         }
 
         $bindResult = $stmt->bind_param("ssssssssssssssssssssssssssssssssss", 
@@ -74,39 +75,40 @@ function saveNomineeDetails($request) {
             $annexure_file_url
         );
 
+
         
         if ($bindResult === false) {
-            $reponse['errors'][] = ("Error in binding parameters: " . $stmt->error);
+            $response['errors'][] = ("Error in binding parameters: " . $stmt->error);
         }
         
         // Execute the statement
         if (!$stmt->execute()) {
-            $reponse['errors'][] = ("Error in executing statement: " . $stmt->error);
+            $response['errors'][] = ("Error in executing statement: " . $stmt->error);
         }
 
         
         $nominee_id = $mysqli->insert_id;
-        $reponse['errors'][] = saveAcadmicQualification($request, $nominee_id);
-        $reponse['errors'][] = saveScientistsData($request, $nominee_id);
+        saveAcadmicQualification($request, $nominee_id);
+        saveScientistsData($request, $nominee_id);
 
-        $reponse['errors'] = array_filter($reponse['errors'], function($value) { 
+        $response['errors'] = array_filter($response['errors'], function($value) { 
             return $value;
         });
         
-        if(isset($reponse['errors']) && count($reponse['errors'])) {
+        if(isset($response['errors']) && count($response['errors'])) {
             throw new Exception('Error');
         }
         
         $mysqli->commit();
 
         $queryString = http_build_query(['success' => 'Form Submitted Successfully']);
-        header("Location: admin-panel.php?$queryString");
+        header("Location: ../admin-panel.php?$queryString");
         
     } catch(Exception $e) {
         $mysqli->rollback();
-        $reponse['errors'][] = "Error: " . $e->getMessage();
+        $response['errors'][] = "Error: " . $e->getMessage();
 
-        $queryString = http_build_query($reponse);
+        $queryString = http_build_query($response);
 
         header("Location: errors.php?$queryString");
         exit();
@@ -114,20 +116,26 @@ function saveNomineeDetails($request) {
 }
 
 // Save Employement details
-function saveEmployementDetails($request, $nominee_id) {
+function saveEmploymentDetails($request, $nominee_id) {
     try {
 
         global $mysqli;
 
-        $data = $request['employement_details'];
+        // $data = $request['employement_details'];
 
         // $saveEmployementDetailsId = saveEmployementDetailsId($request, $nominee_id);
         
-        foreach ($request['employement_details'] as $employee) {
+        foreach ($request['employement_details'] as $data) {
             // Prepare SQL statement
             $sql = ("INSERT INTO employement_details (period_form, period_to, place_of_employment, designation, scale_of_pay) VALUES (?, ?, ?, ?, ?)");
             
-            $stmt = $mysqli->prepare($sql);
+              // Prepare and bind parameters
+              $stmt = $mysqli->prepare($sql);
+              if ($stmt === false) {
+                  return ("Error in preparing statement: " . $mysqli->error);
+              }
+
+            // $stmt = $mysqli->prepare($sql);
             
             // Bind parameters
             $bindResult = $stmt->bind_param("ssssss", 
@@ -201,43 +209,48 @@ function saveScientistsData($request, $nominee_id) {
 }
 
 function saveAcadmicQualification($request, $nominee_id) {
-    try {
-
+   try {
         global $mysqli;
 
         foreach ($request['academic_qualification'] as $key => $qualification) {
-            // Prepare SQL statement
-            $sql = "INSERT INTO academic_qualification (type, course_id, university_id, passing_year, division_cgp, additional_particulars, nominee_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            
-            // Prepare and bind parameters
-            $stmt = $mysqli->prepare($sql);
-            if ($stmt === false) {
-                return ("Error in preparing statement: " . $mysqli->error);
+            // Check if 'course_id' is provided and not null
+            if (isset($qualification['course_id']) && $qualification['course_id'] !== null) {
+                // Prepare SQL statement
+                $sql = "INSERT INTO academic_qualification (type, course_id, university_id, passing_year, division_cgp, additional_particulars, nominee_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+                // Prepare and bind parameters
+                $stmt = $mysqli->prepare($sql);
+                if ($stmt === false) {
+                    return ("Error in preparing statement: " . $mysqli->error);
+                }
+
+                // Bind parameters
+                $bindResult = $stmt->bind_param("sssssss", 
+                    $qualification['type'],
+                    $qualification['course_id'],
+                    $qualification['university_id'],
+                    $qualification['passing_year'],
+                    $qualification['division_cgp'],
+                    $qualification['additional_particulars'],
+                    $nominee_id
+                );
+
+                if ($bindResult === false) {
+                    return ("Error in binding parameters: " . $stmt->error);
+                }
+
+                // Execute the statement
+                if (!$stmt->execute()) {
+                    return ("Error in executing statement: " . $stmt->error);
+                }
+
+                // Close the statement
+                $stmt->close();
+            } else {
+                // Handle case where 'course_id' is missing or null
+                return "Error: 'course_id' is missing or null";
             }
-        
-            $bindResult = $stmt->bind_param("sssssss", 
-                $qualification['type'],
-                $qualification['course_id'],
-                $qualification['university_id'],
-                $qualification['passing_year'],
-                $qualification['division_cgp'],
-                $qualification['additional_particulars'],
-                $nominee_id
-            );
-        
-            if ($bindResult === false) {
-                return ("Error in binding parameters: " . $stmt->error);
-            }
-        
-            // Execute the statement
-            if (!$stmt->execute()) {
-                return ("Error in executing statement: " . $stmt->error);
-            }
-        
-            // Close the statement
-            $stmt->close();
         }
-    
     } catch(Exception $e) {
         return "Error: " . $e->getMessage();
     }
@@ -496,3 +509,36 @@ function dd($data) {
     echo "<br />";
     die;
 }
+
+// After form is submitted:
+function updateFormSubmittedStatus($userId) {
+    global $mysqli;
+
+    $sql = "UPDATE users SET form_submited = 1 WHERE id = ?";
+    $stmt = $mysqli->prepare($sql);
+
+    if ($stmt === false) {
+        return ("Error in preparing statement: " . $mysqli->error);
+    }
+
+    $bindResult = $stmt->bind_param("i", $userId);
+
+    if ($bindResult === false) {
+        return ("Error in binding parameters: " . $stmt->error);
+    }
+
+    // Execute the statement
+    if (!$stmt->execute()) {
+        return ("Error in executing statement: " . $stmt->error);
+    }
+
+    return true;
+}
+
+// Inside saveNomineeDetails() function after the form submission is successful
+// $userId = $_SESSION['user']['id'];
+// if (updateFormSubmittedStatus($userId) === true) {
+//     // Update successful
+// } else {
+//     // Handle error
+// }
