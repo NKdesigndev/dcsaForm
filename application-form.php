@@ -32,7 +32,7 @@
         
         <!-- Form START -->
         <div class="container mt-5 application-form">
-            <form action="includes/form-handler.php" method="POST" enctype="multipart/form-data" id="application-form">
+            <form action="includes/form-handler.php" method="POST" enctype="multipart/form-data" id="application-form" data-parsley-validate="">
                 <!-- 1. Name in full & Designation of the nominee* & 2. DOB -->
                 <div class="row field-bl">
                     <!-- Nominee Name -->
@@ -366,57 +366,57 @@
                                 <tr>
                                     <th scope="row">1</th>
                                     <td>
-                                        <input type="date" class="form-control mb-2" placeholder="YYYY-MM-DD - YYYY-MM-DD">
-                                        <input type="date" class="form-control" placeholder="YYYY-MM-DD - YYYY-MM-DD">
+                                        <input type="date" class="form-control mb-2" name="employment_details[0][period_form]" placeholder="YYYY-MM-DD - YYYY-MM-DD">
+                                        <input type="date" class="form-control" name="employment_details[0][period_to]" placeholder="YYYY-MM-DD - YYYY-MM-DD">
                                         
                                     </td>
-                                    <td><input type="text" class="form-control" placeholder="e.g PGIMER, Chandigarh"></td>
-                                    <td><input type="text" class="form-control" placeholder="e.g Scientist"></td>
-                                    <td><input type="text" class="form-control" placeholder="e.g 15600+6000 AGP"></td>
+                                    <td><input type="text" class="form-control" name="employment_details[0][place_of_employment]" placeholder="e.g PGIMER, Chandigarh"></td>
+                                    <td><input type="text" class="form-control" name="employment_details[0][designation]" placeholder="e.g Scientist"></td>
+                                    <td><input type="text" class="form-control" name="employment_details[0][scale_of_pay]" placeholder="e.g 15600+6000 AGP"></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">2</th>
                                     <td>
-                                        <input type="date" class="form-control mb-2" placeholder="YYYY-MM-DD - YYYY-MM-DD">
-                                        <input type="date" class="form-control" placeholder="YYYY-MM-DD - YYYY-MM-DD">
+                                        <input type="date" class="form-control mb-2" name="employment_details[1][period_form]" placeholder="YYYY-MM-DD - YYYY-MM-DD">
+                                        <input type="date" class="form-control" name="employment_details[1][period_to]" placeholder="YYYY-MM-DD - YYYY-MM-DD">
                                         
                                     </td>
-                                    <td><input type="text" class="form-control" placeholder="e.g PGIMER, Chandigarh"></td>
-                                    <td><input type="text" class="form-control" placeholder="e.g Scientist"></td>
-                                    <td><input type="text" class="form-control" placeholder="e.g 15600+6000 AGP"></td>
+                                    <td><input type="text" class="form-control" name="employment_details[1][place_of_employment]" placeholder="e.g PGIMER, Chandigarh"></td>
+                                    <td><input type="text" class="form-control" name="employment_details[1][designation]" placeholder="e.g Scientist"></td>
+                                    <td><input type="text" class="form-control" name="employment_details[1][scale_of_pay]" placeholder="e.g 15600+6000 AGP"></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">3</th>
                                     <td>
-                                        <input type="date" class="form-control mb-2" placeholder="YYYY-MM-DD - YYYY-MM-DD">
-                                        <input type="date" class="form-control" placeholder="YYYY-MM-DD - YYYY-MM-DD">
+                                        <input type="date" class="form-control mb-2" name="employment_details[2][period_form]" placeholder="YYYY-MM-DD - YYYY-MM-DD">
+                                        <input type="date" class="form-control" name="employment_details[2][period_to]" placeholder="YYYY-MM-DD - YYYY-MM-DD">
                                         
                                     </td>
-                                    <td><input type="text" class="form-control" placeholder="e.g PGIMER, Chandigarh"></td>
-                                    <td><input type="text" class="form-control" placeholder="e.g Scientist"></td>
-                                    <td><input type="text" class="form-control" placeholder="e.g 15600+6000 AGP"></td>
+                                    <td><input type="text" class="form-control" name="employment_details[2][place_of_employment]" placeholder="e.g PGIMER, Chandigarh"></td>
+                                    <td><input type="text" class="form-control" name="employment_details[2][designation]" placeholder="e.g Scientist"></td>
+                                    <td><input type="text" class="form-control" name="employment_details[2][scale_of_pay]" placeholder="e.g 15600+6000 AGP"></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">4</th>
                                     <td>
-                                        <input type="date" class="form-control mb-2" placeholder="YYYY-MM-DD - YYYY-MM-DD">
-                                        <input type="date" class="form-control" placeholder="YYYY-MM-DD - YYYY-MM-DD">
+                                        <input type="date" class="form-control mb-2" name="employment_details[3][period_form]" placeholder="YYYY-MM-DD - YYYY-MM-DD">
+                                        <input type="date" class="form-control" name="employment_details[3][period_to]" placeholder="YYYY-MM-DD - YYYY-MM-DD">
                                         
                                     </td>
-                                    <td><input type="text" class="form-control" placeholder="e.g PGIMER, Chandigarh"></td>
-                                    <td><input type="text" class="form-control" placeholder="e.g Scientist"></td>
-                                    <td><input type="text" class="form-control" placeholder="e.g 15600+6000 AGP"></td>
+                                    <td><input type="text" class="form-control" name="employment_details[3][place_of_employment]" placeholder="e.g PGIMER, Chandigarh"></td>
+                                    <td><input type="text" class="form-control" name="employment_details[3][designation]" placeholder="e.g Scientist"></td>
+                                    <td><input type="text" class="form-control" name="employment_details[3][scale_of_pay]" placeholder="e.g 15600+6000 AGP"></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">5</th>
                                     <td>
-                                        <input type="date" class="form-control mb-2" placeholder="YYYY-MM-DD - YYYY-MM-DD">
-                                        <input type="date" class="form-control" placeholder="YYYY-MM-DD - YYYY-MM-DD">
+                                        <input type="date" class="form-control mb-2" name="employment_details[4][period_form]" placeholder="YYYY-MM-DD - YYYY-MM-DD">
+                                        <input type="date" class="form-control" name="employment_details[4][period_to]" placeholder="YYYY-MM-DD - YYYY-MM-DD">
                                         
                                     </td>
-                                    <td><input type="text" class="form-control" placeholder="e.g PGIMER, Chandigarh"></td>
-                                    <td><input type="text" class="form-control" placeholder="e.g Scientist"></td>
-                                    <td><input type="text" class="form-control" placeholder="e.g 15600+6000 AGP"></td>
+                                    <td><input type="text" class="form-control" name="employment_details[4][place_of_employment]" placeholder="e.g PGIMER, Chandigarh"></td>
+                                    <td><input type="text" class="form-control" name="employment_details[4][designation]" placeholder="e.g Scientist"></td>
+                                    <td><input type="text" class="form-control" name="employment_details[4][scale_of_pay]" placeholder="e.g 15600+6000 AGP"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -689,7 +689,8 @@
 
                     <!-- Submit button -->
                     <!-- <input type="submit" class="" value="submit"> -->
-                    <input type="submit" class="submit-btn mx-4" data-bs-toggle="modal" data-bs-target="#ConfirmModal" name="submit_application" value="Submit">
+                    <input type="hidden" name="submit_application" value="Submit">
+                    <input type="submit" class="submit-btn mx-4" value="Submit">
                     
                     <!-- Modal -->
                     <div class="modal fade" id="ConfirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -704,7 +705,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <a href="#" data-bs-dismiss="modal" class="prev-btn"><button type="button">Close</button></a>
-                                    <button type="type" class="submit-btn mx-4">Confirm</button>
+                                    <button type="type" class="submit-btn confirm-btn mx-4">Confirm</button>
                                 </div>
                             </div>
                         </div>
@@ -716,46 +717,21 @@
           
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+    <script src="assets/js/parsley.js"></script>
     <script>
-          // Function to check if the form is filled
-    function isFormFilled() {
-        var inputField = document.getElementById("inputField").value;
-        return inputField !== "";
-    }
 
-    // Show modal only if form is filled
-    document.getElementById("application-form").addEventListener("submit", function (event) {
-        if (isFormFilled()) {
-            $('#ConfirmModal').modal('show');
-        } else {
-            // Prevent form submission if not filled
+        $('#application-form').submit(function() {
             event.preventDefault();
-            alert("Please fill out the form before submitting.");
-        }
-    });
+            if($(this).parsley().isValid()) {
+                $('#ConfirmModal').modal('show');
+            }
+        })
 
-    // Handle confirm button click
-    document.getElementById("confirmButton").addEventListener("click", function () {
-        // Submit form if confirmed
-        document.getElementById("application-form").submit();
-    });
-//         document.getElementById("myForm").addEventListener("submit", function(event) {
-//     // Check if the form is valid
-//     if (!this.checkValidity()) {
-//         // Prevent form submission if the form is not valid
-//         event.preventDefault();
-//         // Display an error message
-//         alert("Please fill out all required fields.");
-//         // Highlight the invalid fields
-//         this.querySelectorAll(':invalid').forEach((elem) => elem.classList.add('is-invalid'));
-//         // Scroll to the first invalid field
-//         this.querySelector(':invalid').scrollIntoView({ behavior: 'smooth' });
-//         return;
-//     }
-//     // If the form is valid, show the modal
-//     $('#ConfirmModal').modal('show');
-// });
-
+        $('.confirm-btn').click(function() {
+            $('#application-form').submit();
+        })
+        
     </script>
 
     <?php require('./view/footer.php'); ?>

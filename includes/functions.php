@@ -90,6 +90,7 @@ function saveNomineeDetails($request) {
         $nominee_id = $mysqli->insert_id;
         saveAcadmicQualification($request, $nominee_id);
         saveScientistsData($request, $nominee_id);
+        saveEmploymentDetails($request, $nominee_id);
 
         $response['errors'] = array_filter($response['errors'], function($value) { 
             return $value;
@@ -120,31 +121,22 @@ function saveEmploymentDetails($request, $nominee_id) {
     try {
 
         global $mysqli;
-
-        // $data = $request['employement_details'];
-
-        // $saveEmployementDetailsId = saveEmployementDetailsId($request, $nominee_id);
         
-        foreach ($request['employement_details'] as $data) {
-            // Prepare SQL statement
-            $sql = ("INSERT INTO employement_details (period_form, period_to, place_of_employment, designation, scale_of_pay) VALUES (?, ?, ?, ?, ?)");
+        // dd($request['employment_details']);
+        foreach ($request['employment_details'] as $data) {
+            $sql = ("INSERT INTO employment_details (nominee_id, period_form, period_to, place_of_employment, designation, scale_of_pay) VALUES (?, ?, ?, ?, ?, ?)");
             
-              // Prepare and bind parameters
               $stmt = $mysqli->prepare($sql);
               if ($stmt === false) {
                   return ("Error in preparing statement: " . $mysqli->error);
               }
-
-            // $stmt = $mysqli->prepare($sql);
-            
-            // Bind parameters
             $bindResult = $stmt->bind_param("ssssss", 
+                $nominee_id,
                 $data['period_form'],
                 $data['period_to'],
                 $data['place_of_employment'],
                 $data['designation'],
                 $data['scale_of_pay'],
-                $nominee_id,
             );
                 
             if ($bindResult === false) {

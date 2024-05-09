@@ -4,16 +4,11 @@ require(__dir__ . '/functions.php');
 session_start();
 
 if(isset($_POST['submit_application'])) {
-    // Your form handling logic here
     
-    // For example:
     $request = $_POST;
-    // Save form data to the database
-    // Assuming you have a function called saveNomineeDetails
     saveNomineeDetails($request);
 
     // Redirect after successful form submission
-    // Assuming you have a function called updateFormSubmittedStatus
     $userId = $_SESSION['user']['id'];
     if (updateFormSubmittedStatus($userId) === true) {
         // Update successful
