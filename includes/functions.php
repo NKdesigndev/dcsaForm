@@ -1,9 +1,13 @@
 <?php
 
+ini_set('display_errors', 1); 
+
 require(__dir__ . '/../config/db-connection.php');
 require(__dir__ . '/../Wkhtmltopdf.php');
+require(__dir__ . '/mail.php');
 
 $request = $_POST;
+ini_set('display_errors', 1);
 
 function saveNomineeDetails($request) {
     
@@ -77,6 +81,7 @@ function saveNomineeDetails($request) {
 
 
         
+        $response = [];
         if ($bindResult === false) {
             $response['errors'][] = ("Error in binding parameters: " . $stmt->error);
         }
@@ -92,9 +97,11 @@ function saveNomineeDetails($request) {
         saveScientistsData($request, $nominee_id);
         saveEmploymentDetails($request, $nominee_id);
 
-        $response['errors'] = array_filter($response['errors'], function($value) { 
-            return $value;
-        });
+        if(isset($response['errors'])) {
+            $response['errors'] = array_filter($response['errors'], function($value) { 
+                return $value;
+            });
+        }
         
         if(isset($response['errors']) && count($response['errors'])) {
             throw new Exception('Error');
@@ -334,13 +341,27 @@ function getNomineeData() {
         $data = getData($nomineeQuery, [$userId]);
         $data['academic_qualification'] = getData($academicQualificationQuery, [$data['id']]);
         $data['research_supervision_details'] = getData($researchSupervisionDetailsQuery, [$data['id']]);
-        $data['scientist_details'] = getData($scientistDetailsQuery, [4]);
-        $data['employment_details'] = getData($employmentDetailsQuery, [4]);
+        $data['scientist_details'] = getData($scientistDetailsQuery, [$data['id']]);
+        $data['employment_details'] = getData($employmentDetailsQuery, [$data['id']]);
         return $data;
         
     } catch (Exception $e) {
         echo $e->getMessage();
     }
+}
+
+function getUsers($page) {
+
+    $recordsPerPage = 10;
+    $offset = ($page - 1) * $recordsPerPage;
+    
+    $query = "SELECT * FROM users WHERE role_id = 2 LIMIT $recordsPerPage OFFSET $offset";
+    $queryCount = "SELECT COUNT(*) as total FROM users WHERE role_id = 2";
+
+    $data['users'] = getData($query, []);
+    $data['count'] = getData($queryCount, []);
+    $data['perPage'] = $recordsPerPage;
+    return $data;
 }
 
 function login($request) {
@@ -369,7 +390,7 @@ function login($request) {
 
             if ($stmt->execute()) {
                 $result = $stmt->get_result();
-
+                
                 if ($result->num_rows == 1) {
                     $row = $result->fetch_assoc();
                     if (password_verify($password, $row['password_hash'])) {
@@ -378,7 +399,6 @@ function login($request) {
                         $_SESSION["loggedin"] = true;
                         $_SESSION["user"] = $row;
 
-                        
                         if($_SESSION['user']['form_submited']) {
                             header("location: ../admin-panel.php");
                         }
@@ -398,8 +418,9 @@ function login($request) {
         }
     }
     
-    if(count($queryString))
+    if(!empty($queryString)) {
         header("location: ../login.php");
+    }
 
     $mysqli->close();
 }
@@ -415,20 +436,26 @@ function signup($request) {
 
     $password_hash = password_hash($request["nomineePassword"], PASSWORD_DEFAULT);
 
+    $token = bin2hex(random_bytes(50));
+    
     // PreparedStatements
-    $sql = "INSERT INTO users (name, email, password_hash) VALUES(?,?,?)";
+    $sql = "INSERT INTO users (name, email, password_hash, verification_token) VALUES(?, ?, ?, ?)";
     $stmt = $mysqli->stmt_init();
 
     if( ! $stmt->prepare($sql)){
         die("SQL error:". $mysqli->error);
     }
 
-    $stmt->bind_param("sss",
+    $stmt->bind_param("ssss",
                         $request["nomineeName"],
                         $request["nomineeEmail"],
-                        $password_hash);
+                        $password_hash,
+                        $token);
 
     if($stmt->execute()){
+
+        // send verification email
+        $test = sendVerificationMail($_POST["nomineeEmail"], $token);
         
         header("Location: ../signup-success.php");
         exit;
@@ -478,7 +505,7 @@ function isRequestGuest() {
     return !isCurrentPage("login.php") && !isCurrentPage("signup.php") && !isCurrentPage("signup-success.php");
 }
 
-function getData($query, $params) {
+function getData($query, $params = []) {
     global $mysqli;
     $stmt = $mysqli->prepare($query);
 

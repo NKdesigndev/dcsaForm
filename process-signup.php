@@ -1,5 +1,7 @@
 <?php
 
+require('includes/mail.php');
+
 // Validate form inputs
 if(empty($_POST["nomineeName"])){
     die("Name is required");
@@ -25,9 +27,10 @@ $password_hash = password_hash($_POST["nomineePassword"], PASSWORD_DEFAULT);
 
 $mysqli = require __DIR__ . "/db-connection.php";
 
+$token = bin2hex(random_bytes(50));
 
 // PreparedStatements
-$sql = "INSERT INTO user (name, email, password_hash) VALUES(?,?,?)";
+$sql = "INSERT INTO user (name, email, password_hash, verification_token) VALUES(?, ?, ?, ?)";
 $stmt = $mysqli->stmt_init();
 
 if( ! $stmt->prepare($sql)){
@@ -37,9 +40,13 @@ if( ! $stmt->prepare($sql)){
 $stmt->bind_param("sss",
                     $_POST["nomineeName"],
                     $_POST["nomineeEmail"],
-                    $password_hash);
+                    $password_hash,
+                    $token);
 
 if($stmt->execute()){
+
+    // send verification email
+    $test = sendVerificationMail($_POST["nomineeEmail"], $token);
     
     header("Location: signup-success.php");
     exit;

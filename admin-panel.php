@@ -51,13 +51,9 @@
                 </div>
                 <!-- Search Box END -->
                 <?php
-                    $mysqli = require __DIR__ . "/config/db-connection.php";
-                    $sql = "SELECT * FROM users"; 
-                    $result = $mysqli->query($sql);
-
-                    if ($result) { 
-                        $users = $result->fetch_all(MYSQLI_ASSOC);
-
+                    $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+                    
+                    $usersData = getUsers($currentPage ?? 1);
                     ?>
                 
                 <table class="table" id="searchedOutput">
@@ -71,20 +67,52 @@
                     <tbody>
                         <?php
                             $i = 1;
-                            foreach($users as $user) {
+                            foreach($usersData['users'] as $user) {
                                 echo '<tr> <td>' . $i++ . '</td>';
                                 echo '<td>' . $user["name"] . '</td>';
                                 echo '<td>' . $user["email"] . '</td>  </tr>';
                             }
                         ?>
-                        <?php
-                        } else {
-                            echo "Error executing query: " . $mysqli->error;
-                        }
-                        
-                        ?>
                     </tbody>
                 </table>
+
+                <?php
+                    $totalRecords = $usersData['count']['total']; // This should come from your database
+                    $recordsPerPage = $usersData['perPage'];
+                    $totalPages = ceil($totalRecords / $recordsPerPage);
+                ?>
+                
+
+                <nav class="d-flex justify-content-end mt-4">
+                    <ul class="pagination">
+                        
+                    <?php
+                        if ($currentPage > 1) {
+                            $prevPage = $currentPage - 1;
+                            echo '<li class="page-item"><a class="page-link" href="?page=' . $prevPage . '">Previous</a></li>';
+                        } else {
+                            echo '<li class="page-item disabled"><span class="page-link">Previous</span></li>';
+                        }
+                        // Page number links
+                        for ($i = 1; $i <= $totalPages; $i++) {
+                            if ($i == $currentPage) {
+                                echo '<li class="page-item active"><span class="page-link">' . $i . '</span></li>';
+                            } else {
+                                echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+                            }
+                        }
+
+                        // Next link
+                        if ($currentPage < $totalPages) {
+                            $nextPage = $currentPage + 1;
+                            echo '<li class="page-item"><a class="page-link" href="?page=' . $nextPage . '">Next</a></li>';
+                        } else {
+                            echo '<li class="page-item disabled"><span class="page-link">Next</span></li>';
+                        }
+                    ?>
+                    </ul>
+                </nav>
+                
             </div>
         <?php endif ?>
     </div>

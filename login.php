@@ -27,6 +27,12 @@
                         <?= $_SESSION['error']; ?>
                     </div>
                 <?php endif ?>
+
+                <?php if(isset($_SESSION['success']) && !empty(isset($_SESSION['success']))): ?>
+                    <div class="alert alert-success m-4">
+                        <?= $_SESSION['success']; ?>
+                    </div>
+                <?php endif ?>
                 
                 <form method="post" action="includes/form-handler.php" novalidate>
                     <div class="modal-body">

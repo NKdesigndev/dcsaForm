@@ -3,7 +3,7 @@
 $host = "localhost";
 $dbname = "dcsa_form";
 $username = "root";
-$password = "";
+$password = "Anviam@123";
 
 $mysqli = new mysqli($host, $username, $password, $dbname);
 
