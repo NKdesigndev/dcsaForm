@@ -13,13 +13,21 @@ function sendMail($email, $body) {
     
     // Send verification email
     $mail = new PHPMailer;
+    // $mail->isSMTP();
+    // $mail->Host = 'localhost'; // Specify main and backup SMTP servers
+    // $mail->SMTPAuth = true;
+    // $mail->Username = null;
+    // $mail->Password = null;
+    // $mail->SMTPSecure = null;
+    // $mail->Port = 1025;
+
+    $mail = new PHPMailer();
     $mail->isSMTP();
-    $mail->Host = 'localhost'; // Specify main and backup SMTP servers
+    $mail->Host = 'sandbox.smtp.mailtrap.io';
     $mail->SMTPAuth = true;
-    $mail->Username = null;
-    $mail->Password = null;
-    $mail->SMTPSecure = null;
-    $mail->Port = 1025;
+    $mail->Port = 2525;
+    $mail->Username = 'a2b9d83cba448f';
+    $mail->Password = '7204ff351a96fe';
 
     $mail->setFrom('your-email@example.com', 'Your Name');
     $mail->addAddress($email);
