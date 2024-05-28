@@ -1,0 +1,2 @@
+INSERT INTO `users` (`id`, `name`, `email`, `password_hash`, `verification_token`, `is_verified`, `role_id`, `form_submited`) VALUES
+(1, 'Admin', 'admin@gmail.com', '$2y$10$uLg.S78K.nW51YfIdLIQduSx8geXiN8YzWzMOywpXtlCXRde2H00y', NULL, 1, 1, 1);

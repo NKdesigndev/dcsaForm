@@ -1,5 +1,7 @@
 <?php
 
+require(__dir__ . '/load-env.php');
+
 $host = "localhost";
 $dbname = "dcsa_form";
 $username = "root";

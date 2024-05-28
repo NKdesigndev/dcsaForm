@@ -5,6 +5,7 @@ ini_set('display_errors', 1);
 require(__dir__ . '/../config/db-connection.php');
 require(__dir__ . '/../Wkhtmltopdf.php');
 require(__dir__ . '/mail.php');
+require __dir__ . '/../vendor/autoload.php';
 
 $request = $_POST;
 ini_set('display_errors', 1);
@@ -315,7 +316,35 @@ function uploadFile($file, $path) {
 }
 
 function printCurrentApplication() {
-    dd(getNomineeData());
+
+    // instantiate and use the dompdf class
+    $options = new Dompdf\Options();
+    $options->set('isHtml5ParserEnabled', true); // Enable HTML5 parser
+    // Add more custom options as needed...
+
+    $dompdf = new Dompdf\Dompdf($options);
+    
+    ob_start();
+
+    // include the file that contains HTML content
+    include __DIR__ . '/../printView.php';
+        
+    // capture the output buffer
+    $html = ob_get_clean();
+
+    echo $html;
+    
+    // load HTML content into Dompdf
+    $dompdf->loadHtml($html);
+
+    // set paper size and orientation
+    $dompdf->setPaper('A4', 'landscape');
+
+    // Render the HTML as PDF
+    $dompdf->render();
+
+    // Output the generated PDF to Browser
+    $dompdf->stream();   
 }
 
 function getNomineeData() {
@@ -339,10 +368,10 @@ function getNomineeData() {
         $employmentDetailsQuery = "SELECT * FROM employment_details WHERE nominee_id = ?";
         
         $data = getData($nomineeQuery, [$userId]);
-        $data['academic_qualification'] = getData($academicQualificationQuery, [$data['id']]);
+        $data['academic_qualification'] = getData($academicQualificationQuery, [$data['id']], true);
         $data['research_supervision_details'] = getData($researchSupervisionDetailsQuery, [$data['id']]);
-        $data['scientist_details'] = getData($scientistDetailsQuery, [$data['id']]);
-        $data['employment_details'] = getData($employmentDetailsQuery, [$data['id']]);
+        $data['scientist_details'] = getData($scientistDetailsQuery, [$data['id']], true);
+        $data['employment_details'] = getData($employmentDetailsQuery, [$data['id']], true);
         return $data;
         
     } catch (Exception $e) {
@@ -505,7 +534,7 @@ function isRequestGuest() {
     return !isCurrentPage("login.php") && !isCurrentPage("signup.php") && !isCurrentPage("signup-success.php");
 }
 
-function getData($query, $params = []) {
+function getData($query, $params = [], $isResultMultiple = false) {
     global $mysqli;
     $stmt = $mysqli->prepare($query);
 
@@ -519,7 +548,7 @@ function getData($query, $params = []) {
     
     $data = $result->fetch_all(MYSQLI_ASSOC);
     
-    return count($data) === 1? $data[0]: $data;
+    return count($data) === 1 && !$isResultMultiple? $data[0]: $data;
 }
 
 function dd($data) {

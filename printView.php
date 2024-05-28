@@ -3,13 +3,18 @@
     <?php 
     
     // require_once('./includes/functions.php'); 
-    require_once('./includes/auth.php'); 
+    // require_once(__DIR__ . '/includes/auth.php'); 
 
     $title = "Shiv Nath Rai Kohli Memorial Mid";
-    require_once('./view/header.php'); 
+    // require_once('./view/header.php'); 
 
     $data = getNomineeData();
+    // dd($_SERVER);
 ?>
+
+<link rel="stylesheet" type="text/css" href="<?= getenv('BASE_URL') ?>/assets/css/main.css">
+<link rel="stylesheet" type="text/css" href="<?= getenv('BASE_URL') ?>/assets/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 <!-- Print view container-->
 <div class="container-fluid printView-con">
@@ -108,14 +113,14 @@
                             $bachelorCourses = [];
                             $masterCourses = [];
                             $mPhilCourses = [];
-
-                            foreach ($data['academic_qualification'] as $course) {
-                                if ($course['type'] == 'bachelor') {
-                                    $bachelorCourses[] = $course;
-                                } elseif ($course['type'] == 'master') {
-                                    $masterCourses[] = $course;
-                                } elseif ($course['type'] == 'mphil') {
-                                    $mPhilCourses[] = $course;
+                            foreach ($data['academic_qualification'] as $academic_qualification) {
+                                // dd($academic_qualification);
+                                if ($academic_qualification['type'] == 'bachelor') {
+                                    $bachelorCourses[] = $academic_qualification;
+                                } elseif ($academic_qualification['type'] == 'master') {
+                                    $masterCourses[] = $academic_qualification;
+                                } elseif ($academic_qualification['type'] == 'mphil') {
+                                    $mPhilCourses[] = $academic_qualification;
                                 }
                             }
                         ?>
@@ -279,12 +284,12 @@
                     </div>
                     
                     <!-- 19. -->
-                    <div class="txt-con col-sm-4 col-md-4 col-lg-4 mt-1">
+                    <!-- <div class="txt-con col-sm-4 col-md-4 col-lg-4 mt-1">
                         <li value="19" class="pr-hdr-1">Details of research publications:</li>
                         <div>
                         <p class="pr-txt p-0">Error <a href="<?= $data['publication_file_url']; ?>" target="_blank">Download File</a></p>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- 20. -->
                     <div class="txt-con col-sm-12 col-md-12 col-lg-12 mt-1">
                         <li value="20" class="pr-hdr-1">[Look at] Details of research supervision at PhD Level:</li>
@@ -426,10 +431,10 @@
                         <p class="pr-txt p-0"><?= $data['others']?></p>
                     </div>
 
-                    <div class="txt-con col-sm-4 px-3 mt-0">
+                    <!-- <div class="txt-con col-sm-4 px-3 mt-0">
                         <li value="22" class="pr-hdr-1 list-unstyled">Certified that information contained is correct.</li>
                         <p class="pr-txt p-0">[Error] <?= $data['confirmation']?></p>
-                    </div>
+                    </div> -->
                 </div>
                 <!-- 23. -->
                 <div class="row">
@@ -468,10 +473,10 @@
                         <p class="pr-txt p-0"><?= $data['nominator_email']?></p>
                     </div>
 
-                    <div class="txt-con col-sm-12 px-3 mt-0">
+                    <!-- <div class="txt-con col-sm-12 px-3 mt-0">
                         <li value="23" class="pr-hdr-1 list-unstyled">Note: May attach any document as annexure, if required:</li>
                         <p class="pr-txt p-0">[Error] <?= $data['annexure_file_url']?></p>
-                    </div>
+                    </div> -->
 
                 </div>
             </ol>
@@ -480,5 +485,5 @@
     </div>
 </div>
 
-<?php require('./view/footer.php'); ?>
+<?php // require('./view/footer.php'); ?>
 
