@@ -23,13 +23,14 @@ function sendMail($email, $body) {
 
     $mail = new PHPMailer();
     $mail->isSMTP();
-    $mail->Host = 'sandbox.smtp.mailtrap.io';
+    $mail->Host = getenv('MAIL_HOST');
     $mail->SMTPAuth = true;
-    $mail->Port = 2525;
-    $mail->Username = 'a2b9d83cba448f';
-    $mail->Password = '7204ff351a96fe';
+    $mail->Username = getenv('MAIL_USERNAME');
+    $mail->Password = getenv('MAIL_PASSWORD');
+    $mail->SMTPSecure = getenv('MAIL_ENCRYPTION');;
+    $mail->Port = getenv('MAIL_PORT');
 
-    $mail->setFrom('your-email@example.com', 'Your Name');
+    $mail->setFrom(getenv('MAIL_FROM_ADDRESS'), getenv('MAIL_FROM_NAME'));
     $mail->addAddress($email);
     
     $mail->isHTML(true);
