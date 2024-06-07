@@ -47,7 +47,7 @@ function sendMail($email, $body) {
 }
 
 function sendVerificationMail($email, $token) {
-    $body = "Click on the following link to verify your email: <a href='http://localhost/dcsaForm/verify.php?token=$token'>Verify Email</a>";
+    $body = "Click on the following link to verify your email: <a href='http://localhost/dcsaForm/verification.php?token=$token'>Verify Email</a>";
 
     if(sendMail($email, $body)) {
         echo 'A verification email has been sent to your email address.';

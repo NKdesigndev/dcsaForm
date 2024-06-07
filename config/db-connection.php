@@ -2,10 +2,10 @@
 
 require(__dir__ . '/load-env.php');
 
-$host = "localhost";
-$dbname = "dcsa_form";
-$username = "root";
-$password = "";
+$host = getenv('DB_HOST');
+$dbname = getenv('DB_DATABASE');
+$username = getenv('DB_USERNAME');
+$password = getenv('DB_PASSWORD');
 
 $mysqli = new mysqli($host, $username, $password, $dbname);
 

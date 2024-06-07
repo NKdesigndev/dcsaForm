@@ -13,9 +13,11 @@
     <div class="container">
         <h1>Greetings!!</h1>
     
-        <p>Signup Successfull.
-            You can now <a href="login.php">Log in</a>
-        </p>
+        <h1>We have sent you an email with a verification link. Please verify you email account using that link to continue to login.</h1>
+        
+        <p>Signup Successfull</p>
+
+        <a href="login.php">Log in</a>
     </div>
 
 </body> 
