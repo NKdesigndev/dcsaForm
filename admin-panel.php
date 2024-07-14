@@ -29,8 +29,8 @@
                         <button class="tabBtn activeBtn"><i class="bi bi-files"></i>Registered Users </button>
                     <?php endif ?>
                     <?php if($_SESSION['user']['role_id'] === 2): ?>
-                        <!-- <a href="includes/form-handler.php?print=true"><button class="tabBtn"><i class="bi bi-printer"></i>print</button></a> -->
-                        <button class="tabBtn get-pdf"><i class="bi bi-printer"></i>print</button>
+                        <a href="includes/form-handler.php?print=true"><button class="tabBtn"><i class="bi bi-printer"></i>print</button></a>
+                        <!-- <button class="tabBtn get-pdf"><i class="bi bi-printer"></i>print</button> -->
                     <?php endif ?>
                     <a href="logout.php"><button class="tabBtn"><i class="bi bi-box-arrow-right"></i>logout</button></a>
             </div>

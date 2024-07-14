@@ -315,24 +315,44 @@ function uploadFile($file, $path) {
 
 }
 
+function fetchHTML($url) {
+    // Initialize a cURL session
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    $html = curl_exec($ch);
+    curl_close($ch);
+
+    return $html;
+}
+
+
 function printCurrentApplication() {
 
     // instantiate and use the dompdf class
     $options = new Dompdf\Options();
     $options->set('isHtml5ParserEnabled', true); // Enable HTML5 parser
+    $options->set('isRemoteEnabled', true);
+    $options->set('DOMPDF_ENABLE_CSS_FLOAT', true);
+    // die;
+
     // Add more custom options as needed...
 
     $dompdf = new Dompdf\Dompdf($options);
     
-    ob_start();
+    // ob_start();
 
     // include the file that contains HTML content
-    include __DIR__ . '/../printView.php';
+    // include __DIR__ . '/../printView.php';
+    // include __DIR__ . '/../test-print.php';
         
     // capture the output buffer
-    $html = ob_get_clean();
+    // $html = ob_get_clean();
+    $html = fetchHTML('http://127.0.0.1/dcsaForm/test-print.php');
 
-    echo $html;
+    // echo $html;
+    
     
     // load HTML content into Dompdf
     $dompdf->loadHtml($html);
@@ -340,11 +360,13 @@ function printCurrentApplication() {
     // set paper size and orientation
     $dompdf->setPaper('A4', 'landscape');
 
-    // Render the HTML as PDF
+    // var_dump($dompdf); die;
+    
+    // Render the HTML as PDF   
     $dompdf->render();
 
     // Output the generated PDF to Browser
-    $dompdf->stream();   
+    $dompdf->stream();
 }
 
 function getNomineeData() {
