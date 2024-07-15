@@ -6,4 +6,4 @@ CREATE TABLE `employment_details` (
   `place_of_employment` varchar(255) DEFAULT NULL,
   `designation` varchar(255) DEFAULT NULL,
   `scale_of_pay` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
